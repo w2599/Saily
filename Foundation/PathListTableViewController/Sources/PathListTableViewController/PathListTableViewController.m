@@ -218,6 +218,14 @@
             [UIAction actionWithTitle:@"Copy Path" image:[UIImage systemImageNamed:@"doc.on.clipboard"] identifier:nil handler:^(__kindof UIAction *_Nonnull action) {
                  [[UIPasteboard generalPasteboard] setString:content];
              }],
+            [UIAction actionWithTitle:@"Open In Filza" image:[UIImage systemImageNamed:@"link"] identifier:nil handler:^(__kindof UIAction *_Nonnull action) {
+                 NSString *urlString = [NSString stringWithFormat:@"filza://view%@", [content stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]]];
+                 NSURL *url = [NSURL URLWithString:urlString];
+                 if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+                 }
+             }],
+
         ];
         return [UIContextMenuConfiguration configurationWithIdentifier:nil previewProvider:nil actionProvider:^UIMenu *_Nullable (NSArray<UIMenuElement *> *_Nonnull suggestedActions) {
                     UIMenu *menu = [UIMenu menuWithTitle:(self.showFullPath ? content : @"") children:cellActions];

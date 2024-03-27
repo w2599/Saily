@@ -42,7 +42,7 @@
 			<string>wiki.qaq.chromatic.repo.add</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>apt-repo</string>
+				<string>sailyadd</string>
 			</array>
 		</dict>
 	</array>

@@ -286,7 +286,7 @@ extension SearchController: UISearchControllerDelegate, UISearchResultsUpdating,
                 return
             }
             // if not, push to add
-            guard let scheme = URL(string: "apt-repo://\(url.absoluteString)") else {
+            guard let scheme = URL(string: "sailyadd://\(url.absoluteString)") else {
                 return
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
