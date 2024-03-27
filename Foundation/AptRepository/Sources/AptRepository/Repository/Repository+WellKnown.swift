@@ -26,11 +26,7 @@ extension Repository {
             return
         default:
             if url.absoluteString.contains("procurs.us"), url.absoluteString.contains("do") {
-                var magic: Double = floor(kCFCoreFoundationVersionNumber / 100.0 + 0.5) * 100.0
-                while magic > kCFCoreFoundationVersionNumber {
-                    magic -= 100.0
-                }
-                distribution = "iphoneos-arm64-rootless/\(Int(magic))"
+                distribution = "1800"
                 component = "main"
             }
             return

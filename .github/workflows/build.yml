@@ -3,17 +3,17 @@ on: [   workflow_dispatch ]
 
 jobs:
   build:
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - name: Checkout
         uses: actions/checkout@master
 
       - name: Install Dependencies
-        run: brew install ldid xz dpkg coreutils
+        run: brew install ldid xz dpkg coreutils bartycrouch
 
       - name: Build
         run: |
-          sudo xcode-select --switch /Applications/Xcode_14.2.app
+          sudo xcode-select --switch /Applications/Xcode_15.4.app
           Resources/compile.release.rootless.sh
 
       - name: Release

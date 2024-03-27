@@ -80,7 +80,7 @@ chmod +x "$GIT_ROOT/ldid_macosx_x86_64"
 "$GIT_ROOT/ldid_macosx_x86_64" -S"$GIT_ROOT/Application/Chromatic/Entitlements.plist" ".$ENV_PREFIX/Applications/chromatic.app/chromatic"
 plutil -replace "CFBundleDisplayName" -string "Saily" ".$ENV_PREFIX/Applications/chromatic.app/Info.plist"
 plutil -replace "CFBundleIdentifier" -string "wiki.qaq.chromatic.release" ".$ENV_PREFIX/Applications/chromatic.app/Info.plist"
-plutil -replace "CFBundleVersion" -string "2.1" ".$ENV_PREFIX/Applications/chromatic.app/Info.plist"
+plutil -replace "CFBundleVersion" -string "3.0" ".$ENV_PREFIX/Applications/chromatic.app/Info.plist"
 plutil -replace "CFBundleShortVersionString" -string "$TIMESTAMP" ".$ENV_PREFIX/Applications/chromatic.app/Info.plist"
 
 cp -r "$GIT_ROOT/build/License/ScannedLicense" ".$ENV_PREFIX/Applications/chromatic.app/Bundle/ScannedLicense"
@@ -97,7 +97,7 @@ awk '{print} END{print "Conflicts: wiki.qaq.chromatic"}' ./DEBIAN/control_ > ./D
 
 chmod -R 0755 DEBIAN
 
-PKG_NAME="chromatic.rel.ci.$TIMESTAMP.deb"
+PKG_NAME="Saily.$TIMESTAMP.deb"
 dpkg-deb -b . "../$PKG_NAME"
 
 echo "Finished build at $WORKING_ROOT"

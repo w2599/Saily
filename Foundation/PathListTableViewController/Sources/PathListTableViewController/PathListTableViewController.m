@@ -219,7 +219,7 @@
                  [[UIPasteboard generalPasteboard] setString:content];
              }],
             [UIAction actionWithTitle:@"Open In Filza" image:[UIImage systemImageNamed:@"link"] identifier:nil handler:^(__kindof UIAction *_Nonnull action) {
-                 NSString *urlString = [NSString stringWithFormat:@"filza://%@", [content stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]]];
+                 NSString *urlString = [NSString stringWithFormat:@"filza://view%@", [content stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]]];
                  NSURL *url = [NSURL URLWithString:urlString];
                  if ([[UIApplication sharedApplication] canOpenURL:url]) {
                     [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
