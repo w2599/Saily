@@ -148,10 +148,10 @@ public final class RepositoryCenter {
         initializeRepository()
         Dog.shared.join(self, "persist engine reported \(container.keys.count) repository", level: .info)
 
-        self.registerRepository(withUrl: URL(string: "https://apt.xina.vip")!)
-        self.registerRepository(withUrl: URL(string: "https://havoc.app")!)
-        self.registerRepository(withUrl: URL(string: "https://apt.procurs.us")!)
-        self.registerRepository(withUrl: URL(string: "http://apt.thebigboss.org/repofiles/cydia")!)
+        // self.registerRepository(withUrl: URL(string: "https://apt.xina.vip")!)
+        // self.registerRepository(withUrl: URL(string: "https://havoc.app")!)
+        // self.registerRepository(withUrl: URL(string: "https://apt.procurs.us")!)
+        // self.registerRepository(withUrl: URL(string: "http://apt.thebigboss.org/repofiles/cydia")!)
 
         // tell package center to load
         let token = PackageCenter.default.summaryReloadToken
