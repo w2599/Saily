@@ -1,5 +1,5 @@
 //
-//  Main.swift
+//  main.swift
 //  Chromatic
 //
 //  Created by Lakr Aream on 2021/8/5.
@@ -65,6 +65,7 @@ do {
 // MARK: - Properties
 
 import PropertyWrapper
+
 Properties.setup(storeAt: documentsDirectory.appendingPathComponent("Settings")) { str in
     Dog.shared.join("Properties", "error occurred \(str)")
 }

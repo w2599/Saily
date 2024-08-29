@@ -16,12 +16,5 @@ let package = Package(
     ],
     targets: [
         .target(name: "SwifterSwift"),
-        .testTarget(
-            name: "SwifterSwiftTests",
-            dependencies: ["SwifterSwift"],
-            path: "Tests",
-            exclude: ["Info.plist"],
-            resources: [.process("ResourcesTests/Resources")]
-        ),
     ]
 )

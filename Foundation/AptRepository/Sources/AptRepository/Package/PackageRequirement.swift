@@ -97,10 +97,10 @@ public struct PackageRequirement: Codable {
                     }
                     switch versionType {
                     case .bigger: return compare == .aIsSmallerThenB
-                    case .biggerOrEqual: return (compare == .aIsSmallerThenB || compare == .aIsEqualToB)
+                    case .biggerOrEqual: return compare == .aIsSmallerThenB || compare == .aIsEqualToB
                     case .equal: return compare == .aIsEqualToB
                     case .smaller: return compare == .aIsBiggerThenB
-                    case .smallerOrEqual: return (compare == .aIsBiggerThenB || compare == .aIsEqualToB)
+                    case .smallerOrEqual: return compare == .aIsBiggerThenB || compare == .aIsEqualToB
                     case .noneSpecific: return true
                     }
                 }

@@ -46,6 +46,9 @@
 /* Block Update */
 "BLOCK_UPDATE" = "Заблокировать обновление";
 
+/* Block Update All (By.zp) */
+"BLOCK_UPDATE_ALL" = "Блокировать все обновления";
+
 /* Broken Repo Removed */
 "BROKEN_REPO_REMOVED" = "Поврежденные репозитории удалены";
 
@@ -72,6 +75,9 @@
 
 /* Close */
 "CLOSE" = "Закрыть";
+
+/* No comment provided by engineer. */
+"Close" = "Закрыть";
 
 /* Collect And Overwrite */
 "COLLECT_AND_OVERWRITE" = "Собрать и перезаписать";
@@ -102,9 +108,6 @@
 
 /* Copy Meta */
 "COPY_META" = "Копировать мета";
-
-/* Copy Script */
-"COPY_SCRIPT" = "Copy Script";
 
 /* Current Installed */
 "CURRENT_INSTALLED" = "Установлено";
@@ -151,6 +154,9 @@
 /* Done */
 "DONE" = "Готово";
 
+/* No comment provided by engineer. */
+"Double tap to open." = "Двойной тап для открытия";
+
 /* Downgrade */
 "DOWNGRADE" = "Понизить";
 
@@ -171,6 +177,9 @@
 
 /* Enable History */
 "ENABLE_HISTORY" = "Включить историю";
+
+/* Enable Quick Mode */
+"ENABLE_QUICK_MODE" = "Включить быстрый режим";
 
 /* Enable random device info will disable commercial operations */
 "ENABLE_RANDOM_DEVICE_INFO_WILL_DISABLE_COMMERCIAL_OPERATIONS" = "Включение случайных сведений об устройстве отключит коммерческие операции";
@@ -232,11 +241,17 @@
 /* Install */
 "INSTALL" = "Установить";
 
+/* Install All (By.zp) */
+"INSTALL_ALL" = "Установить всё";
+
 /* Installation Info Refreshed */
 "INSTALLATION_INFO_REFRESHED" = "Информация об установке обновлена";
 
 /* Installed */
 "INSTALLED" = "Установлено";
+
+/* No comment provided by engineer. */
+"Invalid URL" = "Недопустимый URL";
 
 /* Last Modification */
 "LAST_MODIFICATION" = "Последнее изменение";
@@ -336,6 +351,9 @@
 
 /* We found these links in the clipboard, they may be the source of the software */
 "PASTEBOARD_REPO_DESCRIPTION" = "Мы нашли эти ссылки в буфере обмена, они могут быть источником ПО";
+
+/* No comment provided by engineer. */
+"Path List Viewer" = "Просмотрщик списка путей";
 
 /* Press add button above to add some */
 "PLEASE_ADD_REPO" = "Нажмите кнопку Добавить, чтобы добавить ещё";
@@ -507,6 +525,9 @@
 
 /* This operation cannot be undone */
 "THIS_OPERATION_CANNOT_BE_UNDONE" = "Это действие не может быть отменено.";
+
+/* Please search - long press [package list] - overwrite collection */
+"TIPS1" = "Пожалуйста, найдите - долго нажимайте на [список пакетов] - перезаписать коллекцию";
 
 /* Toggle */
 "TOGGLE" = "Переключить";

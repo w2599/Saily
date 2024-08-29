@@ -175,8 +175,8 @@
         }
 
         private func drawQuoteStripes(with context: CGContext, locations: [CGPoint], size: CGSize) {
-            locations.forEach {
-                let stripeRect = CGRect(origin: $0, size: size)
+            for location in locations {
+                let stripeRect = CGRect(origin: location, size: size)
                 context.fill(stripeRect)
             }
         }

@@ -34,74 +34,74 @@ class PackageMenuAction {
         func describe() -> String {
             switch self {
             case .directInstall:
-                return NSLocalizedString("DIRECT_INSTALL", comment: "Direct Install")
+                NSLocalizedString("DIRECT_INSTALL", comment: "Direct Install")
             case .install:
-                return NSLocalizedString("INSTALL", comment: "Install")
+                NSLocalizedString("INSTALL", comment: "Install")
             case .reinstall:
-                return NSLocalizedString("REINSTALL", comment: "Reinstall")
+                NSLocalizedString("REINSTALL", comment: "Reinstall")
             case .downgrade:
-                return NSLocalizedString("DOWNGRADE", comment: "Downgrade")
+                NSLocalizedString("DOWNGRADE", comment: "Downgrade")
             case .update:
-                return NSLocalizedString("UPDATE", comment: "Update")
+                NSLocalizedString("UPDATE", comment: "Update")
             case .remove:
-                return NSLocalizedString("REMOVE", comment: "Remove")
+                NSLocalizedString("REMOVE", comment: "Remove")
             case .cancelQueue:
-                return NSLocalizedString("CANCEL_QUEUE", comment: "Cancel Queue")
+                NSLocalizedString("CANCEL_QUEUE", comment: "Cancel Queue")
             case .versionControl:
-                return NSLocalizedString("VERSION_CONTROL", comment: "Version Control")
+                NSLocalizedString("VERSION_CONTROL", comment: "Version Control")
             case .blockUpdate:
-                return NSLocalizedString("BLOCK_UPDATE", comment: "Block Update")
+                NSLocalizedString("BLOCK_UPDATE", comment: "Block Update")
             case .unblockUpdate:
-                return NSLocalizedString("UNBLOCK_UPDATE", comment: "Unblock Update")
+                NSLocalizedString("UNBLOCK_UPDATE", comment: "Unblock Update")
             case .download:
-                return NSLocalizedString("DOWNLOAD", comment: "Download")
+                NSLocalizedString("DOWNLOAD", comment: "Download")
             case .collectAndSave:
-                return NSLocalizedString("COLLECT_AND_SAVE", comment: "Collect And Save")
+                NSLocalizedString("COLLECT_AND_SAVE", comment: "Collect And Save")
             case .collectAndOverwrite:
-                return NSLocalizedString("COLLECT_AND_OVERWRITE", comment: "Collect And Overwrite")
+                NSLocalizedString("COLLECT_AND_OVERWRITE", comment: "Collect And Overwrite")
             case .removeCollect:
-                return NSLocalizedString("REMOVE_COLLECT", comment: "Remove Collect")
+                NSLocalizedString("REMOVE_COLLECT", comment: "Remove Collect")
             case .copyMeta:
-                return NSLocalizedString("COPY_META", comment: "Copy Meta")
+                NSLocalizedString("COPY_META", comment: "Copy Meta")
             case .revealFiles:
-                return NSLocalizedString("REVEAL_FILES", comment: "Reveal Files")
+                NSLocalizedString("REVEAL_FILES", comment: "Reveal Files")
             }
         }
 
         func icon() -> UIImage? {
             switch self {
             case .directInstall:
-                return UIImage(systemName: "paperplane")
+                UIImage(systemName: "paperplane")
             case .install:
-                return UIImage(systemName: "arrow.down.square")
+                UIImage(systemName: "arrow.down.square")
             case .reinstall:
-                return UIImage(systemName: "arrow.clockwise.circle")
+                UIImage(systemName: "arrow.clockwise.circle")
             case .downgrade:
-                return UIImage(systemName: "arrow.down.circle")
+                UIImage(systemName: "arrow.down.circle")
             case .update:
-                return UIImage(systemName: "arrow.up.circle")
+                UIImage(systemName: "arrow.up.circle")
             case .remove:
-                return UIImage(systemName: "xmark.circle")
+                UIImage(systemName: "xmark.circle")
             case .cancelQueue:
-                return UIImage(systemName: "circle.dashed")
+                UIImage(systemName: "circle.dashed")
             case .versionControl:
-                return UIImage(systemName: "list.triangle")
+                UIImage(systemName: "list.triangle")
             case .blockUpdate:
-                return UIImage(systemName: "hand.raised")
+                UIImage(systemName: "hand.raised")
             case .unblockUpdate:
-                return UIImage(systemName: "face.dashed")
+                UIImage(systemName: "face.dashed")
             case .download:
-                return UIImage(systemName: "icloud.and.arrow.down")
+                UIImage(systemName: "icloud.and.arrow.down")
             case .collectAndSave:
-                return UIImage(systemName: "rosette")
+                UIImage(systemName: "rosette")
             case .collectAndOverwrite:
-                return UIImage(systemName: "rosette")
+                UIImage(systemName: "rosette")
             case .removeCollect:
-                return UIImage(systemName: "circle.dashed")
+                UIImage(systemName: "circle.dashed")
             case .copyMeta:
-                return UIImage(systemName: "circle.dashed")
+                UIImage(systemName: "circle.dashed")
             case .revealFiles:
-                return UIImage(systemName: "doc.text.magnifyingglass")
+                UIImage(systemName: "doc.text.magnifyingglass")
             }
         }
     }
@@ -475,7 +475,7 @@ class PackageMenuAction {
             var fetch = InterfaceBridge
                 .collectedPackages
                 .filter { $0.identity != package.identity }
-            guard (package.repoRef != nil) else {
+            guard package.repoRef != nil else {
                 SPIndicator.present(title: NSLocalizedString("TIPS1", comment: "Please search - long press [package list] - overwrite collection"),
                                     preset: .error,
                                     from: .center)
@@ -499,7 +499,7 @@ class PackageMenuAction {
             var fetch = InterfaceBridge
                 .collectedPackages
                 .filter { $0.identity != package.identity }
-		guard (package.repoRef != nil) else {
+            guard package.repoRef != nil else {
                 SPIndicator.present(title: NSLocalizedString("TIPS1", comment: "Please search - long press [package list] - overwrite collection"),
                                     preset: .error,
                                     from: .center)

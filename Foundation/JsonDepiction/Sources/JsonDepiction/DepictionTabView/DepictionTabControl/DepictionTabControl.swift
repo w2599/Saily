@@ -54,7 +54,7 @@ class DepictionTabControl: UIView {
     public var highlighted: Bool = false {
         didSet {
             if highlighted {
-                tabLabel.textColor = self.tintColor
+                tabLabel.textColor = tintColor
             } else {
                 tabLabel.textColor = UIColor(red: 143.0 / 255.0, green: 142.0 / 255.0, blue: 128.0 / 255.0, alpha: 1.0)
             }

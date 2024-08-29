@@ -145,9 +145,9 @@ public struct TarReader {
 
     private func getOffset() throws -> UInt64 {
         if #available(macOS 10.15.4, iOS 13.4, watchOS 6.2, tvOS 13.4, *) {
-            return try handle.offset()
+            try handle.offset()
         } else {
-            return handle.offsetInFile
+            handle.offsetInFile
         }
     }
 

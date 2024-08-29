@@ -1,5 +1,5 @@
 //
-//  DropDownCellTableViewCell.swift
+//  DropDownCell.swift
 //  DropDown
 //
 //  Created by Kevin Hirsch on 28/07/15.
@@ -48,13 +48,13 @@
             let executeSelection: () -> Void = { [weak self] in
                 guard let self else { return }
 
-                if let selectedBackgroundColor = self.selectedBackgroundColor {
+                if let selectedBackgroundColor {
                     if selected {
-                        self.backgroundColor = selectedBackgroundColor
-                        self.optionLabel.textColor = self.highlightTextColor
+                        backgroundColor = selectedBackgroundColor
+                        optionLabel.textColor = highlightTextColor
                     } else {
-                        self.backgroundColor = .clear
-                        self.optionLabel.textColor = self.normalTextColor
+                        backgroundColor = .clear
+                        optionLabel.textColor = normalTextColor
                     }
                 }
             }

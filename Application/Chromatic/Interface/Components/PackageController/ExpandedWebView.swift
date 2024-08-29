@@ -67,7 +67,7 @@ class ExpandedWebView: UIView, WKUIDelegate, WKNavigationDelegate {
         }
         let heightWatcher = Timer(timeInterval: 0.25, repeats: true) { [weak self] _ in
             guard let self else { return }
-            self.updateHeightIfNeeded()
+            updateHeightIfNeeded()
         }
         RunLoop.main.add(heightWatcher, forMode: .common)
         timer = heightWatcher

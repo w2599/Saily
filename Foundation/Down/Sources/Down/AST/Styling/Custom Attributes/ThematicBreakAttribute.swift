@@ -1,5 +1,5 @@
 //
-//  ThematicBreaAttributek.swift
+//  ThematicBreakAttribute.swift
 //  Down
 //
 //  Created by John Nguyen on 02.08.19.

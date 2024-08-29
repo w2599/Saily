@@ -25,6 +25,7 @@ import Foundation
 
 #if os(iOS) || os(tvOS)
     import UIKit
+
     #if swift(>=4.2)
         typealias LayoutRelation = NSLayoutConstraint.Relation
         typealias LayoutAttribute = NSLayoutConstraint.Attribute
@@ -35,6 +36,7 @@ import Foundation
     typealias LayoutPriority = UILayoutPriority
 #else
     import AppKit
+
     typealias LayoutRelation = NSLayoutConstraint.Relation
     typealias LayoutAttribute = NSLayoutConstraint.Attribute
     typealias LayoutPriority = NSLayoutConstraint.Priority

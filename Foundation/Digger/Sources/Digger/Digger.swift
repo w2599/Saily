@@ -6,7 +6,7 @@
 //  Copyright © 2017年 github.cornerant. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 public let digger = "Digger"
 

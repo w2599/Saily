@@ -30,15 +30,15 @@ struct SpeedFormatter {
         fileprivate func unitsString() -> String {
             switch self {
             case .bytes:
-                return "B/s"
+                "B/s"
             case .kB:
-                return "kB/s"
+                "kB/s"
             case .MB:
-                return "MB/s"
+                "MB/s"
             case .GB:
-                return "GB/s"
+                "GB/s"
             case .TB:
-                return "TB/s"
+                "TB/s"
             }
         }
     }
@@ -55,18 +55,17 @@ struct SpeedFormatter {
 
     func string(from speed: Double, units: Units? = nil, hideUnits: Bool? = nil, fractionDigits: Int? = nil) -> String {
         let actualUnits = units ?? self.units ?? Units(speed)
-        let speedInUnits: Double
-        switch actualUnits {
+        let speedInUnits: Double = switch actualUnits {
         case .bytes:
-            speedInUnits = speed
+            speed
         case .kB:
-            speedInUnits = speed / 1000
+            speed / 1000
         case .MB:
-            speedInUnits = speed / 1_000_000
+            speed / 1_000_000
         case .GB:
-            speedInUnits = speed / 1_000_000_000
+            speed / 1_000_000_000
         case .TB:
-            speedInUnits = speed / 1_000_000_000_000
+            speed / 1_000_000_000_000
         }
 
         var formatString = "%.\(fractionDigits ?? self.fractionDigits)f"

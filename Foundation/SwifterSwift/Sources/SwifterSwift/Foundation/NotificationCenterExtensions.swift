@@ -28,7 +28,7 @@
         {
             var handler: NSObjectProtocol!
             handler = addObserver(forName: name, object: obj, queue: queue) { [unowned self] in
-                self.removeObserver(handler!)
+                removeObserver(handler!)
                 block($0)
             }
         }

@@ -11,11 +11,13 @@
     #if canImport(UIKit)
 
         import UIKit
+
         public typealias DownFont = UIFont
 
     #elseif canImport(AppKit)
 
         import AppKit
+
         public typealias DownFont = NSFont
 
     #endif

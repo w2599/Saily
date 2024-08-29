@@ -105,9 +105,9 @@
         /// SwifterSwift: Check if view is in RTL format.
         var isRightToLeft: Bool {
             if #available(iOS 10.0, macCatalyst 13.0, tvOS 10.0, *) {
-                return effectiveUserInterfaceLayoutDirection == .rightToLeft
+                effectiveUserInterfaceLayoutDirection == .rightToLeft
             } else {
-                return false
+                false
             }
         }
 
@@ -454,12 +454,11 @@
             completion: (() -> Void)? = nil
         ) {
             CATransaction.begin()
-            let animation: CAKeyframeAnimation
-            switch direction {
+            let animation = switch direction {
             case .horizontal:
-                animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+                CAKeyframeAnimation(keyPath: "transform.translation.x")
             case .vertical:
-                animation = CAKeyframeAnimation(keyPath: "transform.translation.y")
+                CAKeyframeAnimation(keyPath: "transform.translation.y")
             }
             switch animationType {
             case .linear:

@@ -1,5 +1,5 @@
 //
-//  RepoAddViewController.swift
+//  RepoAddController.swift
 //  Chromatic
 //
 //  Created by Lakr Aream on 2020/4/19.
@@ -234,7 +234,7 @@ class RepoAddViewController: UIViewController {
             .compactMap { $0 }
             .forEach { repositoryAddRequest.insert($0) }
 
-        repositoryAddRequest.forEach { url in
+        for url in repositoryAddRequest {
             RepositoryCenter
                 .default
                 .registerRepository(withUrl: url)

@@ -1,5 +1,5 @@
 //
-//  QuoteStripeAttrbute.swift
+//  QuoteStripeAttribute.swift
 //  Down
 //
 //  Created by John Nguyen on 03.08.19.

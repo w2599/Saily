@@ -55,11 +55,10 @@ final class LZ4Command: Command {
             dictID = nil
         }
 
-        let dictData: Data?
-        if let dictionary {
-            dictData = try Data(contentsOf: URL(fileURLWithPath: dictionary), options: .mappedIfSafe)
+        let dictData: Data? = if let dictionary {
+            try Data(contentsOf: URL(fileURLWithPath: dictionary), options: .mappedIfSafe)
         } else {
-            dictData = nil
+            nil
         }
 
         guard dictID == nil || dictData != nil
@@ -83,11 +82,10 @@ final class LZ4Command: Command {
         } else if compress {
             let inputURL = URL(fileURLWithPath: input)
 
-            let outputURL: URL
-            if let outputPath = output {
-                outputURL = URL(fileURLWithPath: outputPath)
+            let outputURL: URL = if let outputPath = output {
+                URL(fileURLWithPath: outputPath)
             } else {
-                outputURL = inputURL.appendingPathExtension("lz4")
+                inputURL.appendingPathExtension("lz4")
             }
 
             let bs: Int

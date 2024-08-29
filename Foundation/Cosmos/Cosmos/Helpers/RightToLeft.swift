@@ -5,13 +5,13 @@ import UIKit
  Helper functions for dealing with right-to-left languages.
 
  */
-struct RightToLeft {
+enum RightToLeft {
     static func isRightToLeft(_ view: UIView) -> Bool {
         if #available(iOS 9.0, *) {
-            return UIView.userInterfaceLayoutDirection(
+            UIView.userInterfaceLayoutDirection(
                 for: view.semanticContentAttribute) == .rightToLeft
         } else {
-            return false
+            false
         }
     }
 }

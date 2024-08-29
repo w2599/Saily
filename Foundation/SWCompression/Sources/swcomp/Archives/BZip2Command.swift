@@ -52,11 +52,10 @@ final class BZip2Command: Command {
         } else if compress {
             let inputURL = URL(fileURLWithPath: input)
 
-            let outputURL: URL
-            if let outputPath = output {
-                outputURL = URL(fileURLWithPath: outputPath)
+            let outputURL: URL = if let outputPath = output {
+                URL(fileURLWithPath: outputPath)
             } else {
-                outputURL = inputURL.appendingPathExtension("bz2")
+                inputURL.appendingPathExtension("bz2")
             }
 
             let fileData = try Data(contentsOf: inputURL, options: .mappedIfSafe)

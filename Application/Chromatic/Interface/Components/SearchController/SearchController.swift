@@ -240,7 +240,7 @@ class SearchController: UITableViewController {
             Dog.shared.join(self, "\(value.count) result will be applied")
         #endif
         DispatchQueue.main.async { [self] in
-            self.searchResults = value // set it in main thread
+            searchResults = value // set it in main thread
             tableView.reloadData()
         }
     }
@@ -254,16 +254,16 @@ extension SearchController: UISearchControllerDelegate, UISearchResultsUpdating,
             .trimmingCharacters(in: .whitespacesAndNewlines)
         {
             DispatchQueue.global().async { [self] in
-                if self.previousSearchValue == text {
+                if previousSearchValue == text {
                     return
                 }
-                self.previousSearchValue = text
+                previousSearchValue = text
                 #if DEBUG
                     Dog.shared.join(self, "should search with text [\(text)]")
                 #endif
                 let currentToken = UUID()
-                self.searchToken = currentToken
-                self.buildSearchResultWith(key: text, andToken: currentToken)
+                searchToken = currentToken
+                buildSearchResultWith(key: text, andToken: currentToken)
             }
         }
     }
@@ -292,7 +292,7 @@ extension SearchController: UISearchControllerDelegate, UISearchResultsUpdating,
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
                 guard let self else { return }
                 // check if user tapped a cell, and view controller is away
-                if self.view.window?.topMostViewController != self.searchController {
+                if view.window?.topMostViewController != searchController {
                     // do not present
                     return
                 }

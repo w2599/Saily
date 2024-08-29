@@ -17,7 +17,7 @@ public enum Result<T> {
 
 // MARK: -  error help
 
-public let DiggerErrorDomain = "wiki.qaq.DiggerErrorDomain"
+public let DiggerErrorDomain = "DiggerError"
 public enum DiggerError: Int {
     case badURL = 9981
     case fileIsExist = 9982
@@ -60,7 +60,15 @@ public protocol DiggerURL {
 
 extension String: DiggerURL {
     public func asURL() throws -> URL {
-        guard let url = URL(string: self) else { throw NSError(domain: DiggerErrorDomain, code: DiggerError.badURL.rawValue, userInfo: ["url": self]) }
+        guard let url = URL(string: self) else {
+            throw NSError(
+                domain: DiggerErrorDomain,
+                code: DiggerError.badURL.rawValue,
+                userInfo: [
+                    NSLocalizedDescriptionKey: NSLocalizedString("Invalid URL", comment: ""),
+                ]
+            )
+        }
         return url
     }
 }

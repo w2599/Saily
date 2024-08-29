@@ -1,5 +1,5 @@
 //
-//  Dog.swift
+//  Dog+Api.swift
 //  Chromatic
 //
 //  Created by Lakr Aream on 12/15/20.

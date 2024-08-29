@@ -22,9 +22,9 @@ extension TaskManager {
         let represent: Package
         let isUserRequired: Bool
 
-        internal init?(action: TaskManager.PackageAction.Action,
-                       represent package: Package,
-                       isUserRequired: Bool)
+        init?(action: TaskManager.PackageAction.Action,
+              represent package: Package,
+              isUserRequired: Bool)
         {
             self.action = action
             self.isUserRequired = isUserRequired

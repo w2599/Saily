@@ -1,5 +1,5 @@
 //
-//  PackageViewController.swift
+//  PackageController.swift
 //  Chromatic
 //
 //  Created by Lakr Aream on 2020/5/3.
@@ -160,8 +160,8 @@ class PackageController: UIViewController {
             guard let self, let view else {
                 return
             }
-            self.depictionView = view
-            self.updateContentSize()
+            depictionView = view
+            updateContentSize()
         }
 
         updateContentSize()

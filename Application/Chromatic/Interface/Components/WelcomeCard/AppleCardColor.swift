@@ -1,5 +1,5 @@
 //
-//  AppleCardColorView.swift
+//  AppleCardColor.swift
 //  Chromatic
 //
 //  Created by Lakr Aream on 2020/4/18.
@@ -61,7 +61,7 @@ class AppleCardColorView: UIView {
             self.isAinUse = !self.isAinUse
 
             targetContainer.alpha = 0
-            targetContainer.subviews.forEach { view in
+            for view in targetContainer.subviews {
                 view.removeFromSuperview()
             }
 
@@ -161,9 +161,9 @@ class AppleCardColorProvider {
         }
         get {
             if let result = try? decoder.decode(RecordType.self, from: recordData) {
-                return result
+                result
             } else {
-                return []
+                []
             }
         }
     }

@@ -1,5 +1,5 @@
 //
-//  TaskManager+Load.swift
+//  TaskManager+AptApi.swift
 //  Chromatic
 //
 //  Created by Lakr Aream on 2021/8/21.
@@ -160,7 +160,7 @@ extension TaskManager {
         // MARK: - step 4, commit if needed
 
         if !dryRun {
-            resolvedActions.forEach { action in
+            for action in resolvedActions {
                 Dog.shared.join(self,
                                 "\(action.action.rawValue) \(action.represent.identity) \(action.represent.latestVersion ?? "0.0.0.???") \(action.represent.repoRef?.absoluteString ?? "no repo") user required? \(action.isUserRequired)",
                                 level: .verbose)
@@ -235,7 +235,7 @@ extension TaskManager {
             guard let decision = PackageCenter
                 .default
                 .newestPackage(of: candidate) else { continue }
-	    PackageCenter.default.blockedUpdateTable.append(decision.identity)
-	}
+            PackageCenter.default.blockedUpdateTable.append(decision.identity)
+        }
     }
 }

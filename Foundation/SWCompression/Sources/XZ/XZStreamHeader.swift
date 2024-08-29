@@ -16,13 +16,13 @@ struct XZStreamHeader {
         var size: Int {
             switch self {
             case .none:
-                return 0
+                0
             case .crc32:
-                return 4
+                4
             case .crc64:
-                return 8
+                8
             case .sha256:
-                return 32
+                32
             }
         }
     }

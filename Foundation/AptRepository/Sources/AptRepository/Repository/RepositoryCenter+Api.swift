@@ -243,7 +243,7 @@ public extension RepositoryCenter {
             .filter { !(pendingUpdateRequest.contains($0.url) || currentlyInUpdate.contains($0.url)) }
             .map(\.url)
         accessLock.unlock()
-        urls.forEach { brokenRepo in
+        for brokenRepo in urls {
             deleteRepository(withUrl: brokenRepo)
         }
     }

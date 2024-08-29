@@ -28,9 +28,9 @@
 #endif
 
 public class ConstraintMakerFinalizable {
-    internal let description: ConstraintDescription
+    let description: ConstraintDescription
 
-    internal init(_ description: ConstraintDescription) {
+    init(_ description: ConstraintDescription) {
         self.description = description
     }
 

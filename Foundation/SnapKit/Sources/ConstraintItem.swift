@@ -28,15 +28,15 @@
 #endif
 
 public final class ConstraintItem {
-    internal weak var target: AnyObject?
-    internal let attributes: ConstraintAttributes
+    weak var target: AnyObject?
+    let attributes: ConstraintAttributes
 
-    internal init(target: AnyObject?, attributes: ConstraintAttributes) {
+    init(target: AnyObject?, attributes: ConstraintAttributes) {
         self.target = target
         self.attributes = attributes
     }
 
-    internal var layoutConstraintItem: LayoutConstraintItem? {
+    var layoutConstraintItem: LayoutConstraintItem? {
         target as? LayoutConstraintItem
     }
 }

@@ -1,5 +1,5 @@
 //
-//  SetupViewController.swift
+//  SetupController.swift
 //  Chromatic
 //
 //  Created by Lakr Aream on 2021/8/8.
@@ -10,7 +10,6 @@ import AptRepository
 import Digger
 import Dog
 import DropDown
-import Renet
 import SnapKit
 import SPIndicator
 import SwifterSwift
@@ -111,10 +110,7 @@ class SetupViewController: UIViewController {
 
         // MARK: - DOWNLOAD ENGINE
 
-        if let bundleId = Bundle.main.bundleIdentifier {
-            let result = SGRenet.resolveNetworkProblemForApp(withBundleId: bundleId)
-            Dog.shared.join("SGRenet", "resolveNetworkProblemForApp withBundleId \(bundleId) returns \(result)")
-        }
+        PlatformSetup.giveMeNetwork()
 
         DiggerManager.shared.allowsCellularAccess = true
         DiggerManager.shared.logLevel = .high

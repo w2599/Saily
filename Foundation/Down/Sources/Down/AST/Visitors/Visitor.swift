@@ -1,5 +1,5 @@
 //
-//  Vistor.swift
+//  Visitor.swift
 //  Down
 //
 //  Created by John Nguyen on 07.04.19.

@@ -14,14 +14,14 @@ public protocol DepictionViewDelegate: NSObject {
     func subviewHeightChanged()
 }
 
-internal protocol DepictionViewProtocol: DepictionViewDelegate {
+protocol DepictionViewProtocol: DepictionViewDelegate {
     func depictionHeight(width: CGFloat) -> CGFloat
 }
 
 public class DepictionBaseView: UIView, DepictionViewProtocol {
-    internal var parentViewController: UIViewController?
+    var parentViewController: UIViewController?
     public weak var delegate: DepictionViewDelegate?
-    internal var defaultTintColor: UIColor?
+    var defaultTintColor: UIColor?
     private(set) var isActionable: Bool
     public var isHighlighted: Bool = false
 

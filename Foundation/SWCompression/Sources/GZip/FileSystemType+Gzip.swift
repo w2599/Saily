@@ -24,15 +24,15 @@ extension FileSystemType {
     var osTypeByte: UInt8 {
         switch self {
         case .fat:
-            return 0
+            0
         case .unix:
-            return 3
+            3
         case .macintosh:
-            return 7
+            7
         case .ntfs:
-            return 11
+            11
         default:
-            return 255
+            255
         }
     }
 }

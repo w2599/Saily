@@ -14,15 +14,15 @@ class PackageSavedCollectionController: PackageCollectionController {
         title = NSLocalizedString("COLLECTED_PACKAGES", comment: "Collected Packages")
         super.viewDidLoad()
         let clearItem = UIBarButtonItem(image: .fluent(.delete24Filled),
-                                                            style: .done,
-                                                            target: self,
-                                                            action: #selector(clearBlock))
+                                        style: .done,
+                                        target: self,
+                                        action: #selector(clearBlock))
         let installItem = UIBarButtonItem(title: NSLocalizedString("INSTALL_ALL", comment: "Install All (By.zp)"),
-                                           style: .done,
-                                           target: self,
-                                           action: #selector(installAll))
+                                          style: .done,
+                                          target: self,
+                                          action: #selector(installAll))
         let spaceItem = UIBarButtonItem(title: "   ", style: .plain, target: nil, action: nil)
-        navigationItem.rightBarButtonItems = [clearItem,spaceItem,installItem]
+        navigationItem.rightBarButtonItems = [clearItem, spaceItem, installItem]
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -56,17 +56,16 @@ class PackageSavedCollectionController: PackageCollectionController {
     @objc
     func installAll() {
         let collected = InterfaceBridge.collectedPackages
-	var actions = [TaskManager.PackageAction]()
+        var actions = [TaskManager.PackageAction]()
         for item in collected {
-            guard (item.repoRef != nil) else { continue }
+            guard item.repoRef != nil else { continue }
             guard let action = TaskManager.PackageAction(action: .install,
-                                           represent: item,
-                                           isUserRequired: true) else { continue }
-	    actions.append(action)
-	}
-	actions.forEach { TaskManager.shared.resolveInstall(action: $0) }
+                                                         represent: item,
+                                                         isUserRequired: true) else { continue }
+            actions.append(action)
+        }
+        actions.forEach { TaskManager.shared.resolveInstall(action: $0) }
     }
-
 
     func reloadCollectionItems() {
         dataSource = InterfaceBridge

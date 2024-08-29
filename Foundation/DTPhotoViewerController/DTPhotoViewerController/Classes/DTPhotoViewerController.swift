@@ -687,12 +687,10 @@ extension DTPhotoViewerController {
         if collectionView.numberOfItems(inSection: 0) > index {
             let indexPath = IndexPath(item: index, section: 0)
 
-            let position: UICollectionView.ScrollPosition
-
-            if scrollDirection == .vertical {
-                position = .bottom
+            let position: UICollectionView.ScrollPosition = if scrollDirection == .vertical {
+                .bottom
             } else {
-                position = .right
+                .right
             }
 
             collectionView.scrollToItem(at: indexPath, at: position, animated: animated)

@@ -183,7 +183,7 @@ infix operator ±
 /// - Returns: tuple of plus-minus operation (example: 2 ± 3 -> (5, -1)).
 public func ± (lhs: Int, rhs: Int) -> (Int, Int) {
     // http://nshipster.com/swift-operators/
-    return (lhs + rhs, lhs - rhs)
+    (lhs + rhs, lhs - rhs)
 }
 
 // swiftlint:enable identifier_name
@@ -196,7 +196,7 @@ prefix operator ±
 /// - Returns: tuple of plus-minus operation (example: ± 2 -> (2, -2)).
 public prefix func ± (int: Int) -> (Int, Int) {
     // http://nshipster.com/swift-operators/
-    return (int, -int)
+    (int, -int)
 }
 
 // swiftlint:enable identifier_name

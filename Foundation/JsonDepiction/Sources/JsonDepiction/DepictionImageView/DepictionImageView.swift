@@ -41,9 +41,10 @@ class DepictionImageView: DepictionBaseView {
 
         SDWebImageManager.shared.loadImage(with: URL(string: url),
                                            options: .highPriority,
-                                           progress: nil) { [weak self] image, _, _, _, _, _ in
+                                           progress: nil)
+        { [weak self] image, _, _, _, _, _ in
             if let image, let self {
-                self.imageView?.image = image
+                imageView?.image = image
                 let size = image.size
                 if self.width == 0 {
                     self.width = self.height * (size.width / size.height)
@@ -51,7 +52,7 @@ class DepictionImageView: DepictionBaseView {
                 if self.height == 0 {
                     self.height = self.width * (size.height / size.width)
                 }
-                self.delegate?.subviewHeightChanged()
+                delegate?.subviewHeightChanged()
             }
         }
 

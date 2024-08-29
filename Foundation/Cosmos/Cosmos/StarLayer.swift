@@ -5,7 +5,7 @@ import UIKit
  Creates a layer with a single star in it.
 
  */
-struct StarLayer {
+enum StarLayer {
     /**
 
      Creates a square layer with given size and draws the star shape in it.

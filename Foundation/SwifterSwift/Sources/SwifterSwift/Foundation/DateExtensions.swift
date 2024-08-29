@@ -626,25 +626,25 @@
                 var components: Set<Calendar.Component> {
                     switch component {
                     case .second:
-                        return [.year, .month, .day, .hour, .minute, .second]
+                        [.year, .month, .day, .hour, .minute, .second]
 
                     case .minute:
-                        return [.year, .month, .day, .hour, .minute]
+                        [.year, .month, .day, .hour, .minute]
 
                     case .hour:
-                        return [.year, .month, .day, .hour]
+                        [.year, .month, .day, .hour]
 
                     case .weekOfYear, .weekOfMonth:
-                        return [.yearForWeekOfYear, .weekOfYear]
+                        [.yearForWeekOfYear, .weekOfYear]
 
                     case .month:
-                        return [.year, .month]
+                        [.year, .month]
 
                     case .year:
-                        return [.year]
+                        [.year]
 
                     default:
-                        return []
+                        []
                     }
                 }
 
@@ -807,11 +807,11 @@
             var format: String {
                 switch style {
                 case .oneLetter:
-                    return "EEEEE"
+                    "EEEEE"
                 case .threeLetters:
-                    return "EEE"
+                    "EEE"
                 case .full:
-                    return "EEEE"
+                    "EEEE"
                 }
             }
             dateFormatter.setLocalizedDateFormatFromTemplate(format)
@@ -832,11 +832,11 @@
             var format: String {
                 switch style {
                 case .oneLetter:
-                    return "MMMMM"
+                    "MMMMM"
                 case .threeLetters:
-                    return "MMM"
+                    "MMM"
                 case .full:
-                    return "MMMM"
+                    "MMMM"
                 }
             }
             dateFormatter.setLocalizedDateFormatFromTemplate(format)
@@ -944,8 +944,7 @@
         ///   - range: The range in which to create a random date.
         ///   - generator: The random number generator to use when creating the new random date.
         /// - Returns: A random date within the bounds of `range`.
-        static func random(in range: ClosedRange<Date>, using generator: inout some RandomNumberGenerator) -> Date
-        {
+        static func random(in range: ClosedRange<Date>, using generator: inout some RandomNumberGenerator) -> Date {
             Date(timeIntervalSinceReferenceDate:
                 TimeInterval.random(
                     in: range.lowerBound.timeIntervalSinceReferenceDate ... range.upperBound.timeIntervalSinceReferenceDate,

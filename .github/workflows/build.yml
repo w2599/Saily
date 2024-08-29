@@ -14,8 +14,8 @@ jobs:
       - name: Build
         run: |
           sudo xcode-select --switch /Applications/Xcode_14.2.app
-          chmod +x ./Resources/.rootless.sh
-          /bin/bash -c ./Resources/.rootless.sh
+          ./Resources/.rootless.sh
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:

@@ -30,90 +30,90 @@ enum SwcompError {
     var errorCode: Int32 {
         switch self {
         case .noOutputPath:
-            return 1
+            1
         case .lz4BigDictId:
-            return 101
+            101
         case .lz4NoDict:
-            return 102
+            102
         case .lz4BigBlockSize:
-            return 103
+            103
         case .benchmarkSmallIterCount:
-            return 201
+            201
         case .benchmarkUnknownCompResult:
-            return 202
+            202
         case .benchmarkCannotSetup:
-            return 203
+            203
         case .benchmarkCannotMeasure:
-            return 204
+            204
         case .benchmarkCannotMeasureBadOutSize:
-            return 214
+            214
         case .benchmarkReaderTarNoInputSize:
-            return 205
+            205
         case .benchmarkCannotGetSubcommandPathWindows:
-            return 206
+            206
         case .benchmarkCannotAppendToDirectory:
-            return 207
+            207
         case .containerSymLinkDestPath:
-            return 301
+            301
         case .containerHardLinkDestPath:
-            return 311
+            311
         case .containerNoEntryData:
-            return 302
+            302
         case .containerOutPathExistsNotDir:
-            return 303
+            303
         case .fileHandleCannotOpen:
-            return 401
+            401
         case .tarCreateXzNotSupported:
-            return 501
+            501
         case .tarCreateOutPathExists:
-            return 502
+            502
         case .tarCreateInPathDoesNotExist:
-            return 503
+            503
         }
     }
 
     var message: String {
         switch self {
         case .noOutputPath:
-            return "Unable to get output path and no output parameter was specified."
+            "Unable to get output path and no output parameter was specified."
         case .lz4BigDictId:
-            return "Too large dictionary ID."
+            "Too large dictionary ID."
         case .lz4NoDict:
-            return "Dictionary ID is specified without specifying the dictionary itself."
+            "Dictionary ID is specified without specifying the dictionary itself."
         case .lz4BigBlockSize:
-            return "Too big block size."
+            "Too big block size."
         case .benchmarkSmallIterCount:
-            return "Iteration count, if set, must be not less than 1."
+            "Iteration count, if set, must be not less than 1."
         case .benchmarkUnknownCompResult:
-            return "Unknown comparison."
+            "Unknown comparison."
         case let .benchmarkCannotSetup(benchmark, input, error):
-            return "Unable to set up benchmark \(benchmark): input=\(input), error=\(error)."
+            "Unable to set up benchmark \(benchmark): input=\(input), error=\(error)."
         case let .benchmarkCannotMeasure(benchmark, error):
-            return "Unable to measure benchmark \(benchmark), error=\(error)."
+            "Unable to measure benchmark \(benchmark), error=\(error)."
         case let .benchmarkCannotMeasureBadOutSize(benchmark):
-            return "Unable to measure benchmark \(benchmark): outputData.count is not greater than zero."
+            "Unable to measure benchmark \(benchmark): outputData.count is not greater than zero."
         case let .benchmarkReaderTarNoInputSize(input):
-            return "ReaderTAR.benchmarkSetUp(): file size is not available for input=\(input)."
+            "ReaderTAR.benchmarkSetUp(): file size is not available for input=\(input)."
         case .benchmarkCannotGetSubcommandPathWindows:
-            return "Cannot get subcommand path on Windows. (This error should never be shown!)"
+            "Cannot get subcommand path on Windows. (This error should never be shown!)"
         case .benchmarkCannotAppendToDirectory:
-            return "Cannot append results to the save path since it is a directory."
+            "Cannot append results to the save path since it is a directory."
         case let .containerSymLinkDestPath(entryName):
-            return "Unable to get destination path for symbolic link \(entryName)."
+            "Unable to get destination path for symbolic link \(entryName)."
         case let .containerHardLinkDestPath(entryName):
-            return "Unable to get destination path for hard link \(entryName)."
+            "Unable to get destination path for hard link \(entryName)."
         case let .containerNoEntryData(entryName):
-            return "Unable to get data for the entry \(entryName)."
+            "Unable to get data for the entry \(entryName)."
         case .containerOutPathExistsNotDir:
-            return "Specified output path already exists and is not a directory."
+            "Specified output path already exists and is not a directory."
         case .fileHandleCannotOpen:
-            return "Unable to open input file."
+            "Unable to open input file."
         case .tarCreateXzNotSupported:
-            return "XZ compression is not supported when creating a container."
+            "XZ compression is not supported when creating a container."
         case .tarCreateOutPathExists:
-            return "Output path already exists."
+            "Output path already exists."
         case .tarCreateInPathDoesNotExist:
-            return "Specified input path doesn't exist."
+            "Specified input path doesn't exist."
         }
     }
 }

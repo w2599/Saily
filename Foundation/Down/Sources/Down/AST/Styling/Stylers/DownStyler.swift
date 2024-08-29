@@ -84,8 +84,8 @@
 
             indentListItemLeadingParagraph(in: str, prefixLength: prefixLength, in: leadingParagraphRange)
 
-            paragraphRanges.dropFirst().forEach {
-                indentListItemTrailingParagraph(in: str, inRange: $0)
+            for paragraphRange in paragraphRanges.dropFirst() {
+                indentListItemTrailingParagraph(in: str, inRange: paragraphRange)
             }
         }
 
@@ -217,13 +217,13 @@
 
         private func headingAttributes(for level: Int) -> (DownFont, DownColor, NSParagraphStyle) {
             switch level {
-            case 1: return (fonts.heading1, colors.heading1, paragraphStyles.heading1)
-            case 2: return (fonts.heading2, colors.heading2, paragraphStyles.heading2)
-            case 3: return (fonts.heading3, colors.heading3, paragraphStyles.heading3)
-            case 4: return (fonts.heading4, colors.heading4, paragraphStyles.heading4)
-            case 5: return (fonts.heading5, colors.heading5, paragraphStyles.heading5)
-            case 6: return (fonts.heading6, colors.heading6, paragraphStyles.heading6)
-            default: return (fonts.heading1, colors.heading1, paragraphStyles.heading1)
+            case 1: (fonts.heading1, colors.heading1, paragraphStyles.heading1)
+            case 2: (fonts.heading2, colors.heading2, paragraphStyles.heading2)
+            case 3: (fonts.heading3, colors.heading3, paragraphStyles.heading3)
+            case 4: (fonts.heading4, colors.heading4, paragraphStyles.heading4)
+            case 5: (fonts.heading5, colors.heading5, paragraphStyles.heading5)
+            case 6: (fonts.heading6, colors.heading6, paragraphStyles.heading6)
+            default: (fonts.heading1, colors.heading1, paragraphStyles.heading1)
             }
         }
 

@@ -8,6 +8,7 @@
 
 import SPIndicator
 import UIKit
+
 extension SettingView {
     @objc func copyUDIDAction(sender: UITapGestureRecognizer) {
         let view: SettingElement = sender.view as! SettingElement
@@ -89,7 +90,8 @@ extension SettingView {
         }
         let userAgentControl = SettingElement(iconSystemNamed: "safari",
                                               text: NSLocalizedString("USER_AGENT", comment: "User Agent"),
-                                              dataType: .submenuWithAction) {
+                                              dataType: .submenuWithAction)
+        {
             var ret = InterfaceBridge.mainUserAgent
             if ret.count < 1 { ret = "_" }
             return ret

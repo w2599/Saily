@@ -33,9 +33,9 @@ public struct ConstraintLayoutSupportDSL: ConstraintDSL {
         support
     }
 
-    internal let support: ConstraintLayoutSupport
+    let support: ConstraintLayoutSupport
 
-    internal init(support: ConstraintLayoutSupport) {
+    init(support: ConstraintLayoutSupport) {
         self.support = support
     }
 

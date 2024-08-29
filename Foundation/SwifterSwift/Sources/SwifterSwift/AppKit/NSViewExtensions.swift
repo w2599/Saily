@@ -108,9 +108,9 @@
         var backgroundColor: NSColor? {
             get {
                 if let colorRef = layer?.backgroundColor {
-                    return NSColor(cgColor: colorRef)
+                    NSColor(cgColor: colorRef)
                 } else {
-                    return nil
+                    nil
                 }
             }
             set {

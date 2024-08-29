@@ -46,6 +46,9 @@
 /* Block Update */
 "BLOCK_UPDATE" = "Ignorar actualizaciones";
 
+/* Block Update All (By.zp) */
+"BLOCK_UPDATE_ALL" = "Bloquear todas las actualizaciones";
+
 /* Broken Repo Removed */
 "BROKEN_REPO_REMOVED" = "Repos rotos eliminados";
 
@@ -72,6 +75,9 @@
 
 /* Close */
 "CLOSE" = "Cerrar";
+
+/* No comment provided by engineer. */
+"Close" = "Cerrar";
 
 /* Collect And Overwrite */
 "COLLECT_AND_OVERWRITE" = "Recopilar y sobrescribir";
@@ -102,9 +108,6 @@
 
 /* Copy Meta */
 "COPY_META" = "Copiar Meta";
-
-/* Copy Script */
-"COPY_SCRIPT" = "Copiar Script";
 
 /* Current Installed */
 "CURRENT_INSTALLED" = "Instalados";
@@ -151,6 +154,9 @@
 /* Done */
 "DONE" = "Hecho";
 
+/* No comment provided by engineer. */
+"Double tap to open." = "Toca dos veces para abrir";
+
 /* Downgrade */
 "DOWNGRADE" = "Degradar";
 
@@ -171,6 +177,9 @@
 
 /* Enable History */
 "ENABLE_HISTORY" = "Activar historial";
+
+/* Enable Quick Mode */
+"ENABLE_QUICK_MODE" = "Habilitar modo rápido";
 
 /* Enable random device info will disable commercial operations */
 "ENABLE_RANDOM_DEVICE_INFO_WILL_DISABLE_COMMERCIAL_OPERATIONS" = "Activar información aleatoria del dispositivo desactivará las operaciones comerciales";
@@ -232,11 +241,17 @@
 /* Install */
 "INSTALL" = "Instalar";
 
+/* Install All (By.zp) */
+"INSTALL_ALL" = "Instalar todo";
+
 /* Installation Info Refreshed */
 "INSTALLATION_INFO_REFRESHED" = "Información de instalación actualizada";
 
 /* Installed */
 "INSTALLED" = "Instalado";
+
+/* No comment provided by engineer. */
+"Invalid URL" = "URL inválida";
 
 /* Last Modification */
 "LAST_MODIFICATION" = "Última Modificación";
@@ -336,6 +351,9 @@
 
 /* We found these links in the clipboard, they may be the source of the software */
 "PASTEBOARD_REPO_DESCRIPTION" = "Encontramos estos enlaces en el portapapeles, pueden ser la fuente del tweak";
+
+/* No comment provided by engineer. */
+"Path List Viewer" = "Visor de lista de rutas";
 
 /* Press add button above to add some */
 "PLEASE_ADD_REPO" = "Presiona el botón Agregar arriba para agregar algunos";
@@ -507,6 +525,9 @@
 
 /* This operation cannot be undone */
 "THIS_OPERATION_CANNOT_BE_UNDONE" = "Esta operación no se puede deshacer.";
+
+/* Please search - long press [package list] - overwrite collection */
+"TIPS1" = "Por favor, busque - mantenga presionado [lista de paquetes] - sobrescribir colección";
 
 /* Toggle */
 "TOGGLE" = "Agregar todas";

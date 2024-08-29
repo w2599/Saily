@@ -27,19 +27,19 @@
     import AppKit
 #endif
 
-internal enum ConstraintRelation: Int {
+enum ConstraintRelation: Int {
     case equal = 1
     case lessThanOrEqual
     case greaterThanOrEqual
 
-    internal var layoutRelation: LayoutRelation {
+    var layoutRelation: LayoutRelation {
         switch self {
         case .equal:
-            return .equal
+            .equal
         case .lessThanOrEqual:
-            return .lessThanOrEqual
+            .lessThanOrEqual
         case .greaterThanOrEqual:
-            return .greaterThanOrEqual
+            .greaterThanOrEqual
         }
     }
 }

@@ -29,9 +29,9 @@ extension RepoDetailController {
         }
         var contentSize = 0
         if let banners = json["banners"] as? [[String: Any]] {
-            banners.forEach { banner in
+            for banner in banners {
                 guard let view = FeaturedBanner(banner: banner, inside: repo) else {
-                    return
+                    continue
                 }
                 container.addSubview(view)
                 view.snp.makeConstraints { x in

@@ -5,7 +5,7 @@ import UIKit
  Helper functions for calculating rating.
 
  */
-struct CosmosRating {
+enum CosmosRating {
     /**
 
      Returns a decimal number between 0 and 1 describing the star fill level.
@@ -40,11 +40,11 @@ struct CosmosRating {
     static func roundFillLevel(_ starFillLevel: Double, fillMode: StarFillMode) -> Double {
         switch fillMode {
         case .full:
-            return Double(round(starFillLevel))
+            Double(round(starFillLevel))
         case .half:
-            return Double(round(starFillLevel * 2) / 2)
+            Double(round(starFillLevel * 2) / 2)
         case .precise:
-            return starFillLevel
+            starFillLevel
         }
     }
 

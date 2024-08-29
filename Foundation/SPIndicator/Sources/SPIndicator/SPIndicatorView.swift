@@ -72,13 +72,11 @@ import UIKit
         open var iconView: UIView?
 
         private lazy var backgroundView: UIVisualEffectView = {
-            let view: UIVisualEffectView = {
-                if #available(iOS 13.0, *) {
-                    return UIVisualEffectView(effect: UIBlurEffect(style: .systemThickMaterial))
-                } else {
-                    return UIVisualEffectView(effect: UIBlurEffect(style: .light))
-                }
-            }()
+            let view = if #available(iOS 13.0, *) {
+                UIVisualEffectView(effect: UIBlurEffect(style: .systemThickMaterial))
+            } else {
+                UIVisualEffectView(effect: UIBlurEffect(style: .light))
+            }
             view.isUserInteractionEnabled = false
             return view
         }()
@@ -300,7 +298,7 @@ import UIKit
             if gestureRecognizer.state == .ended {
                 gestureIsDragging = false
 
-                var shoudDismissWhenEndAnimation: Bool = false
+                var shoudDismissWhenEndAnimation = false
 
                 UIView.animate(withDuration: presentAndDismissDuration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.beginFromCurrentState, .curveEaseIn], animations: {
                     if self.whenGestureEndShoudHide {
@@ -338,7 +336,7 @@ import UIKit
                     let position = height + bottomInset + 50
                     return CGAffineTransform.identity.translatedBy(x: 0, y: position)
                 case .center:
-                    return CGAffineTransform.identity.translatedBy(x: 0, y: window.frame.height / 2 - self.frame.height / 2).scaledBy(x: 0.9, y: 0.9)
+                    return CGAffineTransform.identity.translatedBy(x: 0, y: window.frame.height / 2 - frame.height / 2).scaledBy(x: 0.9, y: 0.9)
                 }
             }
 
@@ -349,16 +347,16 @@ import UIKit
                 case .top:
                     var topSafeAreaInsets = window.safeAreaInsets.top
                     if topSafeAreaInsets < 20 { topSafeAreaInsets = 20 }
-                    let position = topSafeAreaInsets - 3 + self.offset
+                    let position = topSafeAreaInsets - 3 + offset
                     return CGAffineTransform.identity.translatedBy(x: 0, y: position)
                 case .bottom:
                     let height = window.frame.height
                     var bottomSafeAreaInsets = window.safeAreaInsets.top
                     if bottomSafeAreaInsets < 20 { bottomSafeAreaInsets = 20 }
-                    let position = height - bottomSafeAreaInsets - 3 - self.frame.height - self.offset
+                    let position = height - bottomSafeAreaInsets - 3 - frame.height - offset
                     return CGAffineTransform.identity.translatedBy(x: 0, y: position)
                 case .center:
-                    return CGAffineTransform.identity.translatedBy(x: 0, y: window.frame.height / 2 - self.frame.height / 2)
+                    return CGAffineTransform.identity.translatedBy(x: 0, y: window.frame.height / 2 - frame.height / 2)
                 }
             }
 
@@ -401,9 +399,9 @@ import UIKit
         }
 
         private var titlesFullWidth: CGFloat {
-            if let iconView = self.iconView {
+            if let iconView {
                 let space = iconView.frame.maxY + spaceBetweenTitlesAndImage
-                return frame.width - space - layoutMargins.right - self.spaceBetweenTitlesAndImage
+                return frame.width - space - layoutMargins.right - spaceBetweenTitlesAndImage
             } else {
                 return frame.width - layoutMargins.left - layoutMargins.right
             }
@@ -482,44 +480,44 @@ import UIKit
 
             let layoutIcon = { [weak self] in
                 guard let self else { return }
-                guard let iconView = self.iconView else { return }
+                guard let iconView else { return }
                 iconView.frame = .init(
-                    origin: .init(x: self.layoutMargins.left, y: iconView.frame.origin.y),
+                    origin: .init(x: layoutMargins.left, y: iconView.frame.origin.y),
                     size: self.layout.iconSize
                 )
-                iconView.center.y = self.bounds.midY
+                iconView.center.y = bounds.midY
             }
 
             let layoutTitleCenteredCompact = { [weak self] in
                 guard let self else { return }
-                guard let titleLabel = self.titleLabel else { return }
+                guard let titleLabel else { return }
                 titleLabel.textAlignment = .center
-                titleLabel.layoutDynamicHeight(width: self.titlesCompactWidth)
-                titleLabel.center.x = self.frame.width / 2
+                titleLabel.layoutDynamicHeight(width: titlesCompactWidth)
+                titleLabel.center.x = frame.width / 2
             }
 
             let layoutTitleCenteredFullWidth = { [weak self] in
                 guard let self else { return }
-                guard let titleLabel = self.titleLabel else { return }
+                guard let titleLabel else { return }
                 titleLabel.textAlignment = .center
-                titleLabel.layoutDynamicHeight(width: self.titlesFullWidth)
-                titleLabel.center.x = self.frame.width / 2
+                titleLabel.layoutDynamicHeight(width: titlesFullWidth)
+                titleLabel.center.x = frame.width / 2
             }
 
             let layoutTitleLeadingFullWidth = { [weak self] in
                 guard let self else { return }
-                guard let titleLabel = self.titleLabel else { return }
-                guard let iconView = self.iconView else { return }
-                let rtl = self.effectiveUserInterfaceLayoutDirection == .rightToLeft
+                guard let titleLabel else { return }
+                guard let iconView else { return }
+                let rtl = effectiveUserInterfaceLayoutDirection == .rightToLeft
                 titleLabel.textAlignment = rtl ? .right : .left
-                titleLabel.layoutDynamicHeight(width: self.titlesFullWidth)
-                titleLabel.frame.origin.x = self.layoutMargins.left + iconView.frame.width + self.spaceBetweenTitlesAndImage
+                titleLabel.layoutDynamicHeight(width: titlesFullWidth)
+                titleLabel.frame.origin.x = layoutMargins.left + iconView.frame.width + spaceBetweenTitlesAndImage
             }
 
             let layoutSubtitle = { [weak self] in
                 guard let self else { return }
-                guard let titleLabel = self.titleLabel else { return }
-                guard let subtitleLabel = self.subtitleLabel else { return }
+                guard let titleLabel else { return }
+                guard let subtitleLabel else { return }
                 subtitleLabel.textAlignment = titleLabel.textAlignment
                 subtitleLabel.layoutDynamicHeight(width: titleLabel.frame.width)
                 subtitleLabel.frame.origin.x = titleLabel.frame.origin.x
@@ -527,14 +525,14 @@ import UIKit
 
             let layoutTitleSubtitleByVertical = { [weak self] in
                 guard let self else { return }
-                guard let titleLabel = self.titleLabel else { return }
-                guard let subtitleLabel = self.subtitleLabel else {
-                    titleLabel.center.y = self.bounds.midY
+                guard let titleLabel else { return }
+                guard let subtitleLabel else {
+                    titleLabel.center.y = bounds.midY
                     return
                 }
-                let allHeight = titleLabel.frame.height + subtitleLabel.frame.height + self.spaceBetweenTitles
-                titleLabel.frame.origin.y = (self.frame.height - allHeight) / 2
-                subtitleLabel.frame.origin.y = titleLabel.frame.maxY + self.spaceBetweenTitles
+                let allHeight = titleLabel.frame.height + subtitleLabel.frame.height + spaceBetweenTitles
+                titleLabel.frame.origin.y = (frame.height - allHeight) / 2
+                subtitleLabel.frame.origin.y = titleLabel.frame.maxY + spaceBetweenTitles
             }
 
             // Apply

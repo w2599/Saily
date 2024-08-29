@@ -218,13 +218,17 @@ public extension AuxiliaryExecute {
         }
         // making it a c shit
         let realEnv: [UnsafeMutablePointer<CChar>?] = realEnvironmentBuilder.map { $0.withCString(strdup) }
-        defer { for case let env? in realEnv { free(env) } }
+        defer { for case let env? in realEnv {
+            free(env)
+        } }
 
         // MARK: PREPARE ARGS -
 
         let args = [command] + args
         let argv: [UnsafeMutablePointer<CChar>?] = args.map { $0.withCString(strdup) }
-        defer { for case let arg? in argv { free(arg) } }
+        defer { for case let arg? in argv {
+            free(arg)
+        } }
 
         // MARK: NOW POSIX_SPAWN -
 

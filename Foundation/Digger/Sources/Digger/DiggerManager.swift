@@ -116,11 +116,8 @@ open class DiggerManager: DiggerManagerProtocol {
     public func download(with diggerURL: DiggerURL) -> DiggerSeed {
         switch isDiggerURLCorrect(diggerURL) {
         case let .success(url):
-
-            return createDiggerSeed(with: url)
-
+            createDiggerSeed(with: url)
         case .failure:
-
             fatalError("Please make sure the url or urlString is correct")
         }
     }
@@ -130,8 +127,8 @@ open class DiggerManager: DiggerManagerProtocol {
 
 extension DiggerManager {
     func createDiggerSeed(with url: URL) -> DiggerSeed {
-        if let DiggerSeed = findDiggerSeed(with: url) {
-            return DiggerSeed
+        if let seed = findDiggerSeed(with: url) {
+            return seed
         } else {
             barrierQueue.sync(flags: .barrier) {
                 let timeout = self.timeout == 0.0 ? 100 : self.timeout
@@ -141,7 +138,6 @@ extension DiggerManager {
 
             let diggerSeed = findDiggerSeed(with: url)!
             diggerDelegate?.manager = self
-
             if startDownloadImmediately {
                 diggerSeed.downloadTask.resume()
             }
@@ -152,9 +148,7 @@ extension DiggerManager {
     public func removeDigeerSeed(for url: URL) {
         barrierQueue.sync(flags: .barrier) {
             diggerSeeds.removeValue(forKey: url)
-            if diggerSeeds.isEmpty {
-                diggerDelegate = nil
-            }
+            if diggerSeeds.isEmpty { diggerDelegate = nil }
         }
     }
 
@@ -162,7 +156,6 @@ extension DiggerManager {
         var correctURL: URL
         do {
             correctURL = try diggerURL.asURL()
-
             return Result.success(correctURL)
         } catch {
             diggerLog(error)
@@ -172,17 +165,11 @@ extension DiggerManager {
 
     func findDiggerSeed(with diggerURL: DiggerURL) -> DiggerSeed? {
         var diggerSeed: DiggerSeed?
-
         switch isDiggerURLCorrect(diggerURL) {
         case let .success(url):
-
-            barrierQueue.sync(flags: .barrier) {
-                diggerSeed = diggerSeeds[url]
-            }
+            barrierQueue.sync(flags: .barrier) { diggerSeed = diggerSeeds[url] }
             return diggerSeed
-
         case .failure:
-
             return diggerSeed
         }
     }
@@ -193,15 +180,10 @@ extension DiggerManager {
 public extension DiggerManager {
     func cancelTask(for diggerURL: DiggerURL) {
         switch isDiggerURLCorrect(diggerURL) {
-        case .failure:
-            return
-
+        case .failure: return
         case let .success(url):
-
             barrierQueue.sync(flags: .barrier) {
-                guard let diggerSeed = diggerSeeds[url] else {
-                    return
-                }
+                guard let diggerSeed = diggerSeeds[url] else { return }
                 diggerSeed.downloadTask.cancel()
             }
         }
@@ -209,15 +191,10 @@ public extension DiggerManager {
 
     func stopTask(for diggerURL: DiggerURL) {
         switch isDiggerURLCorrect(diggerURL) {
-        case .failure:
-            return
-
+        case .failure: return
         case let .success(url):
-
             barrierQueue.sync(flags: .barrier) {
-                guard let diggerSeed = diggerSeeds[url] else {
-                    return
-                }
+                guard let diggerSeed = diggerSeeds[url] else { return }
                 if diggerSeed.downloadTask.state == .running {
                     diggerSeed.downloadTask.suspend()
                     diggerDelegate?.notifySpeedZeroCallback(diggerSeed)
@@ -228,19 +205,12 @@ public extension DiggerManager {
 
     func startTask(for diggerURL: DiggerURL) {
         switch isDiggerURLCorrect(diggerURL) {
-        case .failure:
-            return
-
+        case .failure: return
         case let .success(url):
-
             barrierQueue.sync(flags: .barrier) {
-                guard let diggerSeed = diggerSeeds[url] else {
-                    return
-                }
-
+                guard let diggerSeed = diggerSeeds[url] else { return }
                 if diggerSeed.downloadTask.state != .running {
                     diggerSeed.downloadTask.resume()
-
                     self.diggerDelegate?.notifySpeedCallback(diggerSeed)
                 }
             }
@@ -281,7 +251,6 @@ public extension DiggerManager {
 public extension URLSession {
     func dataTask(with url: URL, timeout: TimeInterval) -> URLSessionDataTask {
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: timeout)
-
         let range = DiggerCache.fileSize(filePath: DiggerCache.tempPath(url: url))
         if range > 0 {
             if isContentRangeSupportedOn(url: url, timeout: timeout) {
@@ -291,7 +260,6 @@ public extension URLSession {
                 DiggerCache.removeTempFile(with: url)
             }
         }
-
         let task = dataTask(with: request)
         task.priority = URLSessionTask.defaultPriority
         return task
@@ -303,19 +271,20 @@ public extension URLSession {
             cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
             timeoutInterval: timeout
         )
-        let headRange = "bytes=0-1"
-        preflightCheck.setValue(headRange, forHTTPHeaderField: "Range")
-
+        preflightCheck.httpMethod = "HEAD"
         var supportRange = false
         let sem = DispatchSemaphore(value: 0)
-        URLSession.shared.dataTask(with: preflightCheck) { data, _, error in
-            if error == nil, data?.count == 2 {
-                supportRange = true
+        URLSession.shared.dataTask(with: preflightCheck) { _, resp, _ in
+            if let httpResponse = resp as? HTTPURLResponse {
+                for (key, value) in httpResponse.allHeaderFields {
+                    if let keyStr = key as? String, keyStr.lowercased() == "accept-ranges" {
+                        supportRange = (value as? String)?.lowercased() != "none"
+                    }
+                }
             }
             sem.signal()
         }.resume()
         sem.wait()
-
         return supportRange
     }
 }

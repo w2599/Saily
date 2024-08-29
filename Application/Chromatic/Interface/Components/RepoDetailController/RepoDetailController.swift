@@ -56,9 +56,9 @@ class RepoDetailController: UIViewController {
             x.edges.equalToSuperview()
         }
 
-        repo.metaPackage.values.forEach { package in
+        for package in repo.metaPackage.values {
             guard let section = package.latestMetadata?["section"] else {
-                return
+                continue
             }
             sectionDetails[section, default: []].append(package)
         }

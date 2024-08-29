@@ -34,87 +34,87 @@ enum Benchmarks: String, CaseIterable, ConvertibleFromString {
     var titleName: String {
         switch self {
         case .unGzip:
-            return "GZip Unarchive"
+            "GZip Unarchive"
         case .unBz2:
-            return "BZip2 Decompress"
+            "BZip2 Decompress"
         case .unLz4:
-            return "LZ4 Decompress"
+            "LZ4 Decompress"
         case .unXz:
-            return "XZ Unarchive"
+            "XZ Unarchive"
         case .compDeflate:
-            return "Deflate Compress"
+            "Deflate Compress"
         case .compRatioDeflate:
-            return "Deflate Compression Ratio"
+            "Deflate Compression Ratio"
         case .compBz2:
-            return "BZip2 Compress"
+            "BZip2 Compress"
         case .compRatioBz2:
-            return "BZip2 Compression Ratio"
+            "BZip2 Compression Ratio"
         case .compLz4:
-            return "LZ4 Compress"
+            "LZ4 Compress"
         case .compRatioLz4:
-            return "LZ4 Compression Ratio"
+            "LZ4 Compression Ratio"
         case .compLz4Bd:
-            return "LZ4 Compress (dependent blocks)"
+            "LZ4 Compress (dependent blocks)"
         case .compRatioLz4Bd:
-            return "LZ4 Compression Ratio (dependent blocks)"
+            "LZ4 Compression Ratio (dependent blocks)"
         case .info7z:
-            return "7-Zip Info"
+            "7-Zip Info"
         case .infoTar:
-            return "TAR Info"
+            "TAR Info"
         case .infoZip:
-            return "ZIP Info"
+            "ZIP Info"
         case .createTar:
-            return "TAR Create"
+            "TAR Create"
         case .readerTar:
-            return "TAR Reader"
+            "TAR Reader"
         case .writerTar:
-            return "TAR Writer"
+            "TAR Writer"
         }
     }
 
     func initialized(_ input: String) -> Benchmark {
         switch self {
         case .unGzip:
-            return UnGzip(input)
+            UnGzip(input)
         case .unBz2:
-            return UnBz2(input)
+            UnBz2(input)
         case .unLz4:
-            return UnLz4(input)
+            UnLz4(input)
         case .unXz:
-            return UnXz(input)
+            UnXz(input)
         case .compDeflate:
-            return CompDeflate(input)
+            CompDeflate(input)
         case .compRatioDeflate:
-            return CompRatioDeflate(input)
+            CompRatioDeflate(input)
         case .compBz2:
-            return CompBz2(input)
+            CompBz2(input)
         case .compRatioBz2:
-            return CompRatioBz2(input)
+            CompRatioBz2(input)
         case .compLz4:
-            return CompLz4(input)
+            CompLz4(input)
         case .compRatioLz4:
-            return CompRatioLz4(input)
+            CompRatioLz4(input)
         case .compLz4Bd:
-            return CompLz4Bd(input)
+            CompLz4Bd(input)
         case .compRatioLz4Bd:
-            return CompRatioLz4Bd(input)
+            CompRatioLz4Bd(input)
         case .info7z:
-            return Info7z(input)
+            Info7z(input)
         case .infoTar:
-            return InfoTar(input)
+            InfoTar(input)
         case .infoZip:
-            return InfoZip(input)
+            InfoZip(input)
         case .createTar:
-            return CreateTar(input)
+            CreateTar(input)
         case .readerTar:
-            return ReaderTar(input)
+            ReaderTar(input)
         case .writerTar:
-            return WriterTar(input)
+            WriterTar(input)
         }
     }
 
     static var allBenchmarks: String {
-        Self.allCases.map(\.rawValue).joined(separator: ", ")
+        allCases.map(\.rawValue).joined(separator: ", ")
     }
 }
 
@@ -607,7 +607,7 @@ private extension URL {
     func directorySize() throws -> Int {
         let urls = FileManager.default.enumerator(at: self, includingPropertiesForKeys: nil)?.allObjects as! [URL]
         return try urls.lazy.reduce(0) {
-            (try $1.resourceValues(forKeys: [.totalFileAllocatedSizeKey]).totalFileAllocatedSize ?? 0) + $0
+            try ($1.resourceValues(forKeys: [.totalFileAllocatedSizeKey]).totalFileAllocatedSize ?? 0) + $0
         }
     }
 }

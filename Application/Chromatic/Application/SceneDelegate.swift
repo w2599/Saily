@@ -105,7 +105,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func openQuickAddRepo(scene: UIScene, url: URL) {
-        while !SetupViewController.setupCompleted { sleep(1) }
+        while !SetupViewController.setupCompleted {
+            sleep(1)
+        }
         DispatchQueue.main.async {
             if let presenter =
                 (
@@ -125,7 +127,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func openQuickInstall(scene: UIScene, url: URL) {
-        while !SetupViewController.setupCompleted { sleep(1) }
+        while !SetupViewController.setupCompleted {
+            sleep(1)
+        }
         DispatchQueue.main.async {
             if let presenter =
                 (

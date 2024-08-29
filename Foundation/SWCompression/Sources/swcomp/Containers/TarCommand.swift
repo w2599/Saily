@@ -159,7 +159,7 @@ final class TarCommand: Command {
                         guard entry != nil
                         else { return true }
                         if entry!.info.type == .directory {
-                            directoryAttributes.append(try writeDirectory(entry!, outputURL, verbose))
+                            try directoryAttributes.append(writeDirectory(entry!, outputURL, verbose))
                         } else {
                             try writeFile(entry!, outputURL, verbose)
                         }

@@ -5,7 +5,7 @@ import UIKit
  Functions for making cosmos view accessible.
 
  */
-struct CosmosAccessibility {
+enum CosmosAccessibility {
     /**
 
      Makes the view accesible by settings its label and using rating as value.

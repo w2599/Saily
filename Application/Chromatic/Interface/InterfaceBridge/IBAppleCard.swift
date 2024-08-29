@@ -1,5 +1,5 @@
 //
-//  SFAppleCard.swift
+//  IBAppleCard.swift
 //  Chromatic
 //
 //  Created by Lakr Aream on 2021/8/29.

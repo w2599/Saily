@@ -43,7 +43,7 @@ func write(_ entries: [some ContainerEntry], _ outputPath: String, _ verbose: Bo
 
     // First, we create directories.
     for entry in entries where entry.info.type == .directory {
-        directoryAttributes.append(try writeDirectory(entry, outputURL, verbose))
+        try directoryAttributes.append(writeDirectory(entry, outputURL, verbose))
     }
 
     // Now, we create the rest of files.

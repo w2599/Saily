@@ -22,11 +22,11 @@ class TaskProcessor {
     public var rootlessPrefix = "/var/jb"
 
     private init() {
-        var res = AuxiliaryExecuteWrapper.rootspawn(command:  "/var/jb/bin/readlink",
-                                                        args: ["-f", "/var/jb"],
-                                                          timeout: 2) { _ in }
+        var res = AuxiliaryExecuteWrapper.rootspawn(command: "/var/jb/bin/readlink",
+                                                    args: ["-f", "/var/jb"],
+                                                    timeout: 2) { _ in }
         rootlessPrefix = (res.1).trimmingCharacters(in: .whitespacesAndNewlines)
-        
+
         if FileManager.default.fileExists(atPath: "\(rootlessPrefix)/Library/dpkg/status") {
             Dog.shared.join("TaskProcessor",
                             "rootless environment detected, insert dpkg flag",
@@ -46,7 +46,7 @@ class TaskProcessor {
         let requiresRestart: Bool
         var dryRun: Bool = false
 
-        internal init(install: [(String, URL)], remove: [String]) {
+        init(install: [(String, URL)], remove: [String]) {
             self.install = install
             self.remove = remove
             requiresRestart = install
@@ -135,7 +135,8 @@ class TaskProcessor {
             output(NSLocalizedString("UNLOCKING_SYSTEM", comment: "Unlocking system") + "\n")
             let result = AuxiliaryExecuteWrapper.rootspawn(command: AuxiliaryExecuteWrapper.rm,
                                                            args: ["-f", "\(isRootlessEnvironment ? rootlessPrefix : "")/var/lib/dpkg/lock"],
-                                                           timeout: 1) { str in
+                                                           timeout: 1)
+            { str in
                 output(str)
             }
             output("[*] returning \(result.0)\n")
@@ -155,12 +156,13 @@ class TaskProcessor {
                     // arguments += ["--root=\(rootlessPrefix)"]
                 }
                 if operation.dryRun { arguments.append("--dry-run") }
-                operation.remove.forEach { item in
+                for item in operation.remove {
                     arguments.append(item)
                 }
                 let result = AuxiliaryExecuteWrapper.rootspawn(command: AuxiliaryExecuteWrapper.dpkg,
                                                                args: arguments,
-                                                               timeout: 0) { str in
+                                                               timeout: 0)
+                { str in
                     Dog.shared.join(self, "dpkg rm: \(str)", level: .info)
                     output(str)
                 }
@@ -181,12 +183,13 @@ class TaskProcessor {
                 ]
                 // if isRootlessEnvironment { arguments += ["--root=\(rootlessPrefix)"] }
                 if operation.dryRun { arguments.append("--dry-run") }
-                operation.install.forEach { item in
+                for item in operation.install {
                     arguments.append(item.1.path)
                 }
                 let result = AuxiliaryExecuteWrapper.rootspawn(command: AuxiliaryExecuteWrapper.dpkg,
                                                                args: arguments,
-                                                               timeout: 0) { str in
+                                                               timeout: 0)
+                { str in
                     Dog.shared.join(self, "dpkg inst: \(str)", level: .info)
                     output(str)
                 }
@@ -208,7 +211,8 @@ class TaskProcessor {
             if operation.dryRun { arguments.append("--dry-run") }
             let result = AuxiliaryExecuteWrapper.rootspawn(command: AuxiliaryExecuteWrapper.dpkg,
                                                            args: arguments,
-                                                           timeout: 0) { str in
+                                                           timeout: 0)
+            { str in
                 Dog.shared.join(self, "dpkg config all")
                 output(str)
             }

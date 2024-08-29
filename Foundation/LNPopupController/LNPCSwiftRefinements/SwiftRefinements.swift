@@ -55,13 +55,13 @@ public extension UIViewController {
         get {
             switch __popupInteractionStyle {
             case .none:
-                return .none
+                .none
             case .drag:
-                return .drag
+                .drag
             case .snap:
-                return __popupSnapPercent == LNSnapPercentDefault ? .snap : .customizedSnap(percent: __popupSnapPercent)
+                __popupSnapPercent == LNSnapPercentDefault ? .snap : .customizedSnap(percent: __popupSnapPercent)
             default:
-                return .default
+                .default
             }
         }
         set {

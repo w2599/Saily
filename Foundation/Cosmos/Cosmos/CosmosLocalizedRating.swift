@@ -5,7 +5,7 @@ import Foundation
  Returns the word "Rating" in user's language. It is used for voice-over  in accessibility mode.
 
  */
-struct CosmosLocalizedRating {
+enum CosmosLocalizedRating {
     static var defaultText = "Rating"
 
     static var localizedRatings = [

@@ -1,5 +1,5 @@
 //
-//  UIView+Constraints.swift
+//  DPDUIView+Extension.swift
 //  DropDown
 //
 //  Created by Kevin Hirsch on 28/07/15.
@@ -12,7 +12,7 @@
 
     // MARK: - Constraints
 
-    internal extension UIView {
+    extension UIView {
         func addConstraints(format: String, options: NSLayoutConstraint.FormatOptions = [], metrics: [String: AnyObject]? = nil, views: [String: UIView]) {
             addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: options, metrics: metrics, views: views))
         }
@@ -25,13 +25,13 @@
 
     // MARK: - Bounds
 
-    internal extension UIView {
+    extension UIView {
         var windowFrame: CGRect? {
             superview?.convert(frame, to: nil)
         }
     }
 
-    internal extension UIWindow {
+    extension UIWindow {
         static func visibleWindow() -> UIWindow? {
             var currentWindow = UIApplication.shared.keyWindow
 

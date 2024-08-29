@@ -54,9 +54,9 @@ public struct ConstraintLayoutGuideDSL: ConstraintAttributesDSL {
         guide
     }
 
-    internal let guide: ConstraintLayoutGuide
+    let guide: ConstraintLayoutGuide
 
-    internal init(guide: ConstraintLayoutGuide) {
+    init(guide: ConstraintLayoutGuide) {
         self.guide = guide
     }
 }

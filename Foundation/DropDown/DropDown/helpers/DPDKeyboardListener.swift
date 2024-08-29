@@ -1,5 +1,5 @@
 //
-//  KeyboardListener.swift
+//  DPDKeyboardListener.swift
 //  DropDown
 //
 //  Created by Kevin Hirsch on 30/07/15.
@@ -10,7 +10,7 @@
 
     import UIKit
 
-    internal final class KeyboardListener {
+    final class KeyboardListener {
         static let sharedInstance = KeyboardListener()
 
         fileprivate(set) var isVisible = false

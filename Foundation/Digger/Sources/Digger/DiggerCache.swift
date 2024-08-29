@@ -6,8 +6,8 @@
 //  Copyright © 2017年 github.cornerant. All rights reserved.
 //
 
+import CommonCrypto
 import Foundation
-import SwiftMD5
 
 public enum DiggerCache {
     ///  In the sandbox cactes directory, custom your cache directory
@@ -18,7 +18,7 @@ public enum DiggerCache {
     }
 
     static func tempPath(url: URL) -> String {
-        SwiftMD5.md5From(url.absoluteString).tmpDir
+        url.absoluteString.sha1().tmpDir
     }
 
     static func cachePath(url: URL) -> String {
@@ -179,5 +179,15 @@ public extension String {
     var tmpDir: String {
         let path = NSTemporaryDirectory() as NSString
         return path.appendingPathComponent((self as NSString).lastPathComponent)
+    }
+
+    func sha1() -> String {
+        let data = Data(utf8)
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
+        data.withUnsafeBytes {
+            _ = CC_SHA1($0.baseAddress, CC_LONG(data.count), &digest)
+        }
+        let hexBytes = digest.map { String(format: "%02hhx", $0) }
+        return hexBytes.joined()
     }
 }

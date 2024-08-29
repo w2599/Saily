@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Dog+Private.swift
 //
 //
 //  Created by Lakr Aream on 2021/8/7.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-internal extension Dog {
+extension Dog {
     /// Compare date with log file name
     /// - Parameters:
     ///   - a: log a

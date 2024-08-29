@@ -46,6 +46,9 @@
 /* Block Update */
 "BLOCK_UPDATE" = "アップデートをブロック";
 
+/* Block Update All (By.zp) */
+"BLOCK_UPDATE_ALL" = "すべての更新をブロック";
+
 /* Broken Repo Removed */
 "BROKEN_REPO_REMOVED" = "無効なリポジトリを削除";
 
@@ -72,6 +75,9 @@
 
 /* Close */
 "CLOSE" = "閉じる";
+
+/* No comment provided by engineer. */
+"Close" = "閉じる";
 
 /* Collect And Overwrite */
 "COLLECT_AND_OVERWRITE" = "パッケージを再更新";
@@ -104,9 +110,6 @@
 
 /* Copy Meta */
 "COPY_META" = " パッケージのリンクをコピー";
-
-/* Copy Script */
-"COPY_SCRIPT" = "スクリプトをコピー";
 
 /* Current Installed */
 "CURRENT_INSTALLED" = "インストール済み";
@@ -153,6 +156,9 @@
 /* Done */
 "DONE" = "完了";
 
+/* No comment provided by engineer. */
+"Double tap to open." = "ダブルタップで開く";
+
 /* Downgrade */
 "DOWNGRADE" = "ダウングレード";
 
@@ -173,6 +179,9 @@
 
 /* Enable History */
 "ENABLE_HISTORY" = "履歴を有効化";
+
+/* Enable Quick Mode */
+"ENABLE_QUICK_MODE" = "クイックモードを有効にする";
 
 /* Enable random device info will disable commercial operations */
 "ENABLE_RANDOM_DEVICE_INFO_WILL_DISABLE_COMMERCIAL_OPERATIONS" = "ランダムなデバイス情報を有効にすると購入操作が出来なくなります。";
@@ -234,11 +243,17 @@
 /* Install */
 "INSTALL" = "インストール";
 
+/* Install All (By.zp) */
+"INSTALL_ALL" = "すべてをインストール";
+
 /* Installation Info Refreshed */
 "INSTALLATION_INFO_REFRESHED" = "パッケージは最新です";
 
 /* Installed */
 "INSTALLED" = "インストール済み";
+
+/* No comment provided by engineer. */
+"Invalid URL" = "無効なURL";
 
 /* Last Modification */
 "LAST_MODIFICATION" = "変更日時";
@@ -338,6 +353,9 @@
 
 /* We found these links in the clipboard, they may be the source of the software */
 "PASTEBOARD_REPO_DESCRIPTION" = "クリップボードでこれらのリンクを見つけました。ここから選択することでリポジトリを追加できます。";
+
+/* No comment provided by engineer. */
+"Path List Viewer" = "パスリストビューア";
 
 /* Press add button above to add some */
 "PLEASE_ADD_REPO" = "上の追加ボタンを押して追加します";
@@ -510,6 +528,9 @@
 /* This operation cannot be undone
    This operation cannot be undone. */
 "THIS_OPERATION_CANNOT_BE_UNDONE" = "この操作を元に戻すことはできません。";
+
+/* Please search - long press [package list] - overwrite collection */
+"TIPS1" = "検索してください - [パッケージリスト]を長押ししてコレクションを上書きします";
 
 /* Toggle */
 "TOGGLE" = "全て選択";

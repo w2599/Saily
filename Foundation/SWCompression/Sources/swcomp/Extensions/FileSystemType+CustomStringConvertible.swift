@@ -10,15 +10,15 @@ extension FileSystemType: CustomStringConvertible {
     public var description: String {
         switch self {
         case .fat:
-            return "FAT"
+            "FAT"
         case .macintosh:
-            return "old Macintosh file system"
+            "old Macintosh file system"
         case .ntfs:
-            return "NTFS"
+            "NTFS"
         case .unix:
-            return "UNIX-like"
+            "UNIX-like"
         case .other:
-            return "other/unknown"
+            "other/unknown"
         }
     }
 }

@@ -287,11 +287,10 @@
         /// - Returns: UIImage with all corners rounded.
         func withRoundedCorners(radius: CGFloat? = nil) -> UIImage? {
             let maxRadius = min(size.width, size.height) / 2
-            let cornerRadius: CGFloat
-            if let radius, radius > 0, radius <= maxRadius {
-                cornerRadius = radius
+            let cornerRadius: CGFloat = if let radius, radius > 0, radius <= maxRadius {
+                radius
             } else {
-                cornerRadius = maxRadius
+                maxRadius
             }
 
             UIGraphicsBeginImageContextWithOptions(size, false, scale)

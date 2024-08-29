@@ -16,17 +16,32 @@ public class DiggerDelegate: NSObject {
 
 extension DiggerDelegate: URLSessionDataDelegate, URLSessionDelegate {
     public func urlSession(_: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
-        guard let manager else { return }
-        guard let url = dataTask.originalRequest?.url, let diggerSeed = manager.findDiggerSeed(with: url) else {
+        guard let manager,
+              let url = dataTask.originalRequest?.url,
+              let diggerSeed = manager.findDiggerSeed(with: url)
+        else {
+            completionHandler(.cancel)
             return
+        }
+
+        var completionHandlerCalled = false
+        defer {
+            if !completionHandlerCalled {
+                let error = NSError(
+                    domain: DiggerErrorDomain,
+                    code: DiggerError.downloadCanceled.rawValue,
+                    userInfo: [
+                        NSLocalizedDescriptionKey: "Unknown Error",
+                    ]
+                )
+                notifyCompletionCallback(Result.failure(error), diggerSeed)
+                completionHandler(.cancel)
+            }
         }
 
         // the file has been downloaded
         if DiggerCache.isFileExist(atPath: DiggerCache.cachePath(url: url)) {
             let cachesURL = URL(fileURLWithPath: DiggerCache.cachePath(url: url))
-//            let errorInfo = ["theFileHasbeenDownloaded": cachesURL]
-//            let error = NSError(domain: DiggerErrorDomain, code: DiggerError.fileIsExist.rawValue, userInfo: errorInfo)
-//            notifyCompletionCallback(Result.failure(error), diggerSeed)
             dataTask.cancel()
             notifyCompletionCallback(.success(cachesURL), diggerSeed)
             return
@@ -35,12 +50,15 @@ extension DiggerDelegate: URLSessionDataDelegate, URLSessionDelegate {
         if let statusCode = (response as? HTTPURLResponse)?.statusCode,
            !(200 ..< 400).contains(statusCode)
         {
-            let error = NSError(domain: DiggerErrorDomain,
-                                code: DiggerError.invalidStatusCode.rawValue,
-                                userInfo: ["statusCode": statusCode, NSLocalizedDescriptionKey: HTTPURLResponse.localizedString(forStatusCode: statusCode)])
-
+            let error = NSError(
+                domain: DiggerErrorDomain,
+                code: DiggerError.invalidStatusCode.rawValue,
+                userInfo: [
+                    "statusCode": statusCode,
+                    NSLocalizedDescriptionKey: HTTPURLResponse.localizedString(forStatusCode: statusCode),
+                ]
+            )
             notifyCompletionCallback(Result.failure(error), diggerSeed)
-
             return
         }
 
@@ -49,46 +67,28 @@ extension DiggerDelegate: URLSessionDataDelegate, URLSessionDelegate {
         }
 
         // rangeString    String    "bytes 9660646-72300329/72300330"
-        if let totalBytesString = responseHeaders["Content-Length"], let totalBytes = Int64(totalBytesString) {
-            diggerSeed.progress.totalUnitCount = totalBytes
-        }
-
-        if let completedBytesString = responseHeaders["Content-Range"]?.components(separatedBy: "-").first?.components(separatedBy: " ").last,
-           let completedBytes = Int64(completedBytesString)
+        if let fullRange = responseHeaders["Content-Range"],
+           let total = fullRange.components(separatedBy: "/").last,
+           let value = Int64(total)
         {
-            diggerSeed.progress.completedUnitCount = completedBytes
+            diggerSeed.progress.totalUnitCount = value
+        } else if diggerSeed.progress.completedUnitCount == 0 {
+            diggerSeed.progress.totalUnitCount = response.expectedContentLength
         }
 
-        if diggerSeed.progress.totalUnitCount >= DiggerCache.systemFreeSize() {
-            let errorInfo = ["diskOutOfSpace,check systemFreeSize ": url]
-            let error = NSError(domain: DiggerErrorDomain, code: DiggerError.diskOutOfSpace.rawValue, userInfo: errorInfo)
+        if let completedBytesString = responseHeaders["Content-Range"]?
+            .components(separatedBy: "-")
+            .first?
+            .components(separatedBy: " ")
+            .last,
+            let completedBytes = Int64(completedBytesString)
+        { diggerSeed.progress.completedUnitCount = completedBytes }
 
-            notifyCompletionCallback(Result.failure(error), diggerSeed)
-
-            return
-        }
-
-        if diggerSeed.progress.fractionCompleted > 1.0 { // file error
-            DiggerCache.removeItem(atPath: diggerSeed.tempPath)
-            let error = NSError(domain: DiggerErrorDomain, code: DiggerError.fileInfoError.rawValue, userInfo: nil)
-            notifyCompletionCallback(Result.failure(error), diggerSeed)
-            DiggerCache.moveItem(atPath: diggerSeed.tempPath, toPath: diggerSeed.cachePath)
-
-            return
-
-        } else if diggerSeed.progress.fractionCompleted == 1.0 { // file Is Exist in temp
-            DiggerCache.moveItem(atPath: diggerSeed.tempPath, toPath: diggerSeed.cachePath)
-            notifyCompletionCallback(Result.success(diggerSeed.cacheFileURL), diggerSeed)
-
-            return
-
-        } else {
-            diggerSeed.outputStream = OutputStream(toFileAtPath: diggerSeed.tempPath, append: true)
-            diggerSeed.outputStream?.open()
-
-            diggerLog("start to download  \n" + url.absoluteString)
-            completionHandler(.allow)
-        }
+        diggerSeed.outputStream = OutputStream(toFileAtPath: diggerSeed.tempPath, append: true)
+        diggerSeed.outputStream?.open()
+        diggerLog("start to download  \n" + url.absoluteString)
+        completionHandlerCalled = true
+        completionHandler(.allow)
     }
 
     public func urlSession(_: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
@@ -127,6 +127,10 @@ extension DiggerDelegate: URLSessionDataDelegate, URLSessionDelegate {
 
 extension DiggerDelegate {
     func notifyProgressCallback(_ diggerSeed: DiggerSeed) {
+        if diggerSeed.progress.totalUnitCount < diggerSeed.progress.completedUnitCount {
+            diggerSeed.progress.totalUnitCount = diggerSeed.progress.completedUnitCount
+        }
+
         notifySpeedCallback(diggerSeed)
 
         DispatchQueue.main.safeAsync {

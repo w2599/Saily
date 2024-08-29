@@ -64,15 +64,14 @@ extension LZ4: CompressionAlgorithm {
             (dictionaryID != nil ? 0x1 : 0))
 
         // BD byte.
-        let bd: UInt8
-        if blockSize <= 64 * 1024 {
-            bd = 0x40
+        let bd: UInt8 = if blockSize <= 64 * 1024 {
+            0x40
         } else if blockSize <= 256 * 1024 {
-            bd = 0x50
+            0x50
         } else if blockSize <= 1024 * 1024 {
-            bd = 0x60
+            0x60
         } else {
-            bd = 0x70
+            0x70
         }
         out.append(bd)
 
@@ -93,12 +92,11 @@ extension LZ4: CompressionAlgorithm {
         let headerChecksum = XxHash32.hash(data: Data(out[4...]))
         out.append(UInt8(truncatingIfNeeded: (headerChecksum >> 8) & 0xFF))
 
-        var dict: Data
-        if let dictionary {
+        var dict: Data = if let dictionary {
             // The size of the provided dictionary may not match the standard size of 64 KB.
-            dict = dictionary[max(dictionary.endIndex - 64 * 1024, dictionary.startIndex)...]
+            dictionary[max(dictionary.endIndex - 64 * 1024, dictionary.startIndex)...]
         } else {
-            dict = Data()
+            Data()
         }
 
         for i in stride(from: data.startIndex, to: data.endIndex, by: blockSize) {

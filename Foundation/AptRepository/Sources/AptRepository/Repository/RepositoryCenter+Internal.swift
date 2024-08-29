@@ -117,7 +117,7 @@ extension RepositoryCenter {
             dispatchContainer.forEach { currentlyInUpdate.insert($0) }
 
             // send to update
-            dispatchContainer.forEach { url in
+            for url in dispatchContainer {
                 DispatchQueue.global().async { [self] in
                     asyncUpdate(target: url) { [self] success in
                         // remove from in update queue
@@ -293,7 +293,7 @@ extension RepositoryCenter {
             var knockCount = 0
             let knockLock = NSLock()
             // ===
-            availableSearchPath.forEach { searchPath in
+            for searchPath in availableSearchPath {
                 // counter += 1
                 knockLock.lock()
                 knockCount += 1

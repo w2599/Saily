@@ -53,9 +53,9 @@ public extension SPIndicatorIconPreset {
 
     func getHaptic() -> SPIndicatorHaptic {
         switch self {
-        case .error: return .error
-        case .done: return .success
-        case .custom: return .success
+        case .error: .error
+        case .done: .success
+        case .custom: .success
         }
     }
 }

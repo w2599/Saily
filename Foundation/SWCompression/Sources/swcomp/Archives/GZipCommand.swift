@@ -60,11 +60,10 @@ final class GZipCommand: Command {
             let inputURL = URL(fileURLWithPath: input)
             let fileName = inputURL.lastPathComponent
 
-            let outputURL: URL
-            if let outputPath = output {
-                outputURL = URL(fileURLWithPath: outputPath)
+            let outputURL: URL = if let outputPath = output {
+                URL(fileURLWithPath: outputPath)
             } else {
-                outputURL = inputURL.appendingPathExtension("gz")
+                inputURL.appendingPathExtension("gz")
             }
 
             let fileData = try Data(contentsOf: inputURL, options: .mappedIfSafe)

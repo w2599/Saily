@@ -83,9 +83,9 @@ private extension Benchmark? {
     func format(_ value: Double) -> String {
         switch self {
         case let .some(benchmark):
-            return benchmark.format(value)
+            benchmark.format(value)
         case .none:
-            return String(value)
+            String(value)
         }
     }
 }

@@ -108,7 +108,7 @@ public class SevenZipContainer: Container {
 
                 // One stream can contain data for several files, so we need to decode the stream first, then split
                 // it into files.
-                unpackedStreamData = LittleEndianByteReader(data: try folder.unpack(data: streamData))
+                unpackedStreamData = try LittleEndianByteReader(data: folder.unpack(data: streamData))
             }
 
             // `SevenZipSubstreamInfo` object must contain information about file's size and may also contain

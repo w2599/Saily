@@ -1,9 +1,6 @@
 /* %d Operation */
 "%d_OPERATIONS" = "%d 个项目";
 
-/* Tips1 */
-"TIPS1" = "收藏姿势不对{搜索-软件包列表-长按-(覆盖)收藏}";
-
 /* Accounts */
 "ACCOUNTS" = "账号";
 
@@ -79,6 +76,9 @@
 /* Close */
 "CLOSE" = "关闭";
 
+/* No comment provided by engineer. */
+"Close" = "关闭";
+
 /* Collect And Overwrite */
 "COLLECT_AND_OVERWRITE" = "覆盖收藏项";
 
@@ -108,9 +108,6 @@
 
 /* Copy Meta */
 "COPY_META" = "复制元数据";
-
-/* Copy Script */
-"COPY_SCRIPT" = "复制脚本";
 
 /* Current Installed */
 "CURRENT_INSTALLED" = "已安装";
@@ -157,6 +154,9 @@
 /* Done */
 "DONE" = "完成";
 
+/* No comment provided by engineer. */
+"Double tap to open." = "双击以打开";
+
 /* Downgrade */
 "DOWNGRADE" = "降级";
 
@@ -178,11 +178,11 @@
 /* Enable History */
 "ENABLE_HISTORY" = "启用历史记录";
 
-/* Enable random device info will disable commercial operations */
-"ENABLE_RANDOM_DEVICE_INFO_WILL_DISABLE_COMMERCIAL_OPERATIONS" = "启用随机设备信息将会禁用付费软件包。";
-
 /* Enable Quick Mode */
 "ENABLE_QUICK_MODE" = "启用快速模式";
+
+/* Enable random device info will disable commercial operations */
+"ENABLE_RANDOM_DEVICE_INFO_WILL_DISABLE_COMMERCIAL_OPERATIONS" = "启用随机设备信息将会禁用付费软件包。";
 
 /* Enable Share Sheet */
 "ENABLE_SHARE_SHEET" = "启用分享表单";
@@ -249,6 +249,9 @@
 
 /* Installed */
 "INSTALLED" = "已安装";
+
+/* No comment provided by engineer. */
+"Invalid URL" = "无效的链接";
 
 /* Last Modification */
 "LAST_MODIFICATION" = "修改日期";
@@ -348,6 +351,9 @@
 
 /* We found these links in the clipboard, they may be the source of the software */
 "PASTEBOARD_REPO_DESCRIPTION" = "我们在剪贴板中找到了这些软件源记录。";
+
+/* No comment provided by engineer. */
+"Path List Viewer" = "路径检查器";
 
 /* Press add button above to add some */
 "PLEASE_ADD_REPO" = "请点击上面的按钮来添加一些";
@@ -519,6 +525,9 @@
 
 /* This operation cannot be undone */
 "THIS_OPERATION_CANNOT_BE_UNDONE" = "此项操作不可撤销";
+
+/* Tips1 */
+"TIPS1" = "收藏姿势不对{搜索-软件包列表-长按-(覆盖)收藏}";
 
 /* Toggle */
 "TOGGLE" = "切换选择";

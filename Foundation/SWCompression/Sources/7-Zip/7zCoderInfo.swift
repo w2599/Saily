@@ -28,7 +28,7 @@ class SevenZipCoderInfo {
         else { throw SevenZipError.externalNotSupported }
 
         for _ in 0 ..< numFolders {
-            folders.append(try SevenZipFolder(bitReader))
+            try folders.append(SevenZipFolder(bitReader))
         }
 
         type = bitReader.byte()

@@ -47,22 +47,22 @@
         @inlinable
         public init(from decoder: Decoder) throws {
             var container = try decoder.unkeyedContainer()
-            self.init(m11: try container.decode(CGFloat.self),
-                      m12: try container.decode(CGFloat.self),
-                      m13: try container.decode(CGFloat.self),
-                      m14: try container.decode(CGFloat.self),
-                      m21: try container.decode(CGFloat.self),
-                      m22: try container.decode(CGFloat.self),
-                      m23: try container.decode(CGFloat.self),
-                      m24: try container.decode(CGFloat.self),
-                      m31: try container.decode(CGFloat.self),
-                      m32: try container.decode(CGFloat.self),
-                      m33: try container.decode(CGFloat.self),
-                      m34: try container.decode(CGFloat.self),
-                      m41: try container.decode(CGFloat.self),
-                      m42: try container.decode(CGFloat.self),
-                      m43: try container.decode(CGFloat.self),
-                      m44: try container.decode(CGFloat.self))
+            try self.init(m11: container.decode(CGFloat.self),
+                          m12: container.decode(CGFloat.self),
+                          m13: container.decode(CGFloat.self),
+                          m14: container.decode(CGFloat.self),
+                          m21: container.decode(CGFloat.self),
+                          m22: container.decode(CGFloat.self),
+                          m23: container.decode(CGFloat.self),
+                          m24: container.decode(CGFloat.self),
+                          m31: container.decode(CGFloat.self),
+                          m32: container.decode(CGFloat.self),
+                          m33: container.decode(CGFloat.self),
+                          m34: container.decode(CGFloat.self),
+                          m41: container.decode(CGFloat.self),
+                          m42: container.decode(CGFloat.self),
+                          m43: container.decode(CGFloat.self),
+                          m44: container.decode(CGFloat.self))
         }
 
         /// Encodes this value into the given encoder.

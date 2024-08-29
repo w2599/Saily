@@ -11,11 +11,13 @@
     #if canImport(UIKit)
 
         import UIKit
+
         public typealias DownColor = UIColor
 
     #elseif canImport(AppKit)
 
         import AppKit
+
         public typealias DownColor = NSColor
 
     #endif

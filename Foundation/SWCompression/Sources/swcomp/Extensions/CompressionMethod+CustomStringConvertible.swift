@@ -10,17 +10,17 @@ extension CompressionMethod: CustomStringConvertible {
     public var description: String {
         switch self {
         case .bzip2:
-            return "BZip2"
+            "BZip2"
         case .copy:
-            return "none"
+            "none"
         case .deflate:
-            return "deflate"
+            "deflate"
         case .lzma:
-            return "LZMA"
+            "LZMA"
         case .lzma2:
-            return "LZMA2"
+            "LZMA2"
         case .other:
-            return "other/unknown"
+            "other/unknown"
         }
     }
 }

@@ -91,7 +91,7 @@ class DeviceInfo {
             "X-Unique-ID": udid,
             "X-Firmware": firmware,
         ]
-        RepositoryCenter.default.networkingHeaders.forEach { key, value in
+        for (key, value) in RepositoryCenter.default.networkingHeaders {
             DiggerManager.shared.additionalHTTPHeaders[key] = value
         }
     }

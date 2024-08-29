@@ -32,8 +32,8 @@ extension URL {
                 return nil
             }
             return try urls.lazy.reduce(0) {
-                (
-                    try $1
+                try (
+                    $1
                         .resourceValues(forKeys: [.totalFileAllocatedSizeKey])
                         .totalFileAllocatedSize ?? 0
                 ) + $0
@@ -44,8 +44,8 @@ extension URL {
             .contentsOfDirectory(at: self, includingPropertiesForKeys: nil)
             .lazy
             .reduce(0) {
-                (
-                    try $1.resourceValues(forKeys: [.totalFileAllocatedSizeKey])
+                try (
+                    $1.resourceValues(forKeys: [.totalFileAllocatedSizeKey])
                         .totalFileAllocatedSize ?? 0
                 ) + $0
             }

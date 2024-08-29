@@ -24,9 +24,9 @@ class InstalledController: UICollectionViewController, UICollectionViewDelegateF
         func convertToInterfaceString() -> String {
             switch self {
             case .name:
-                return NSLocalizedString("NAME", comment: "Name")
+                NSLocalizedString("NAME", comment: "Name")
             case .lastModification:
-                return NSLocalizedString("LAST_MODIFICATION", comment: "Last Modification")
+                NSLocalizedString("LAST_MODIFICATION", comment: "Last Modification")
             }
         }
     }
@@ -129,13 +129,12 @@ class InstalledController: UICollectionViewController, UICollectionViewDelegateF
     func selectSortOption() {
         let dropDown = DropDown(anchorView: leftAnchor.plainView)
         var dataSource = [String: SortOption]()
-        SortOption.allCases.forEach { option in
+        for option in SortOption.allCases {
             dataSource[option.convertToInterfaceString()] = option
         }
         let actions = SortOption.allCases
         dropDown.dataSource = actions
             .map { $0.convertToInterfaceString() }
-
             .invisibleSpacePadding()
         dropDown.selectionAction = { (index: Int, _: String) in
             guard index >= 0, index < actions.count else { return }
@@ -155,13 +154,13 @@ class InstalledController: UICollectionViewController, UICollectionViewDelegateF
         SPIndicator.present(title: NSLocalizedString("ALL_PACKAGES_UP_TO_DATE", comment: "All Packages Up to Date"),
                             preset: .done)
     }
-    
+
     @objc
     func blockUpdateAll() {
         setupRightButtonItem()
         TaskManager.shared.blockUpdateEverything()
     }
-    
+
     func setupRightButtonItem() {
         if updateFound {
             let rightItem = UIBarButtonItem(image: .fluent(.arrowUpCircle24Filled),
@@ -169,11 +168,11 @@ class InstalledController: UICollectionViewController, UICollectionViewDelegateF
                                             target: self,
                                             action: #selector(sendUpdate))
             let blockItem = UIBarButtonItem(title: NSLocalizedString("BLOCK_UPDATE_ALL", comment: "Block Update All (By.zp)"),
-                                           style: .done,
-                                           target: self,
-                                           action: #selector(blockUpdateAll))
+                                            style: .done,
+                                            target: self,
+                                            action: #selector(blockUpdateAll))
             let spaceItem = UIBarButtonItem(title: "   ", style: .plain, target: nil, action: nil)
-            navigationItem.rightBarButtonItems = [rightItem,spaceItem,blockItem]
+            navigationItem.rightBarButtonItems = [rightItem, spaceItem, blockItem]
         } else {
             let rightItem = UIBarButtonItem(image: .fluent(.checkmarkCircle24Filled),
                                             style: .done,

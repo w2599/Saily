@@ -43,37 +43,37 @@ extension UIColor {
 
         static var separator: UIColor {
             if #available(iOS 13.0, tvOS 13.0, *) {
-                return UIColor.separator
+                UIColor.separator
             } else {
-                return UIColor(red: 60 / 255, green: 60 / 255, blue: 67 / 255, alpha: 1)
+                UIColor(red: 60 / 255, green: 60 / 255, blue: 67 / 255, alpha: 1)
             }
         }
 
         static var label: UIColor {
             if #available(iOS 13.0, tvOS 13.0, *) {
-                return UIColor.label
+                UIColor.label
             } else {
-                return UIColor.black
+                UIColor.black
             }
         }
 
         static var secondaryLabel: UIColor {
             if #available(iOS 13.0, tvOS 13.0, *) {
-                return UIColor.secondaryLabel
+                UIColor.secondaryLabel
             } else {
-                return UIColor(red: 138 / 255, green: 138 / 255, blue: 142 / 255, alpha: 1)
+                UIColor(red: 138 / 255, green: 138 / 255, blue: 142 / 255, alpha: 1)
             }
         }
     }
 
     static var buttonArea: UIColor {
         if #available(iOS 13.0, tvOS 13.0, *) {
-            return UIColor { traits -> UIColor in
+            UIColor { traits -> UIColor in
                 traits.userInterfaceStyle == .dark ? UIColor(red: 61 / 255, green: 62 / 255, blue: 66 / 255, alpha: 1) :
                     UIColor(red: 238 / 255, green: 238 / 255, blue: 240 / 255, alpha: 1)
             }
         } else {
-            return UIColor(red: 238 / 255, green: 238 / 255, blue: 240 / 255, alpha: 1)
+            UIColor(red: 238 / 255, green: 238 / 255, blue: 240 / 255, alpha: 1)
         }
     }
 

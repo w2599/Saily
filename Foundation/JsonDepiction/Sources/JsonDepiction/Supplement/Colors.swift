@@ -1,5 +1,5 @@
 //
-//  SEColors.swift
+//  Colors.swift
 //  ND
 //
 //  Created by Lakr Aream on 2020/5/29.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-internal extension UIColor {
+extension UIColor {
     static let sileoLabel = UIColor.label
     static let downLabel = UIColor.label
     static let sileoSeparatorColor = UIColor.gray.withAlphaComponent(0.2)

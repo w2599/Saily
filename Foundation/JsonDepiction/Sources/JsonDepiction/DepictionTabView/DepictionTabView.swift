@@ -114,7 +114,7 @@ class DepictionTabView: DepictionBaseView, DepictionTabControlContainer {
 
     var activeTab: Int = 0 {
         didSet {
-            self.subviewHeightChanged()
+            subviewHeightChanged()
         }
     }
 

@@ -61,7 +61,8 @@ extension SettingView {
 //        groupEffect1.dropShadow()
         let repoLogin = SettingElement(iconSystemNamed: "person.crop.square.fill",
                                        text: NSLocalizedString("MANAGE_ACCOUNT_INFO", comment: "Manage Account Info"),
-                                       dataType: .submenuWithAction, initData: nil) { _, _ in
+                                       dataType: .submenuWithAction, initData: nil)
+        { _, _ in
             self.parentViewController?.present(next: RepoAccountController())
         }
         let repoDownloadLimit = SettingElement(iconSystemNamed: "link",

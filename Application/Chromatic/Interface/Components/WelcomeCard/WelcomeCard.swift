@@ -120,7 +120,7 @@ class WelcomeCard: UIView {
     @objc
     func updateAvatar() {
         DispatchQueue.main.async { [self] in
-            var avatarLoaded: Bool = false
+            var avatarLoaded = false
             defer {
                 if avatarLoaded {
                     headIconView.contentMode = .scaleAspectFill

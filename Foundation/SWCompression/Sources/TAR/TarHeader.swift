@@ -202,12 +202,11 @@ struct TarHeader {
         // Checksum is calculated based on the complete header with spaces instead of checksum.
         out.append(contentsOf: Array(repeating: 0x20, count: 8))
 
-        let fileTypeIndicator: UInt8
-        switch type {
+        let fileTypeIndicator: UInt8 = switch type {
         case let .normal(entryType):
-            fileTypeIndicator = entryType.fileTypeIndicator
+            entryType.fileTypeIndicator
         case let .special(specialType):
-            fileTypeIndicator = specialType.rawValue
+            specialType.rawValue
         }
         out.append(fileTypeIndicator)
 

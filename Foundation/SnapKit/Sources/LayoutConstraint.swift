@@ -37,10 +37,10 @@ public class LayoutConstraint: NSLayoutConstraint {
         }
     }
 
-    internal weak var constraint: Constraint?
+    weak var constraint: Constraint?
 }
 
-internal func == (lhs: LayoutConstraint, rhs: LayoutConstraint) -> Bool {
+func == (lhs: LayoutConstraint, rhs: LayoutConstraint) -> Bool {
     // If firstItem or secondItem on either constraint has a dangling pointer
     // this comparison can cause a crash. The solution for this is to ensure
     // your layout code hold strong references to things like Views, LayoutGuides

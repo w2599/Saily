@@ -45,8 +45,8 @@ public extension List {
 
         public var debugDescription: String {
             switch self {
-            case .bullet: return "Bullet"
-            case let .ordered(start): return "Ordered (start: \(start))"
+            case .bullet: "Bullet"
+            case let .ordered(start): "Ordered (start: \(start))"
             }
         }
 

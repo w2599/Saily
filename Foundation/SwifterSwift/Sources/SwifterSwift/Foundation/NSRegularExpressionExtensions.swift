@@ -30,7 +30,8 @@
             {
                 enumerateMatches(in: string,
                                  options: options,
-                                 range: NSRange(range, in: string)) { result, flags, stop in
+                                 range: NSRange(range, in: string))
+                { result, flags, stop in
                     var shouldStop = false
                     block(result, flags, &shouldStop)
                     if shouldStop {
@@ -47,7 +48,8 @@
             {
                 enumerateMatches(in: string,
                                  options: options,
-                                 range: NSRange(range, in: string)) { result, flags, stop in
+                                 range: NSRange(range, in: string))
+                { result, flags, stop in
                     var shouldStop = false
                     block(result, flags, &shouldStop)
                     if shouldStop {

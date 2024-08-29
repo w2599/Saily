@@ -1,5 +1,5 @@
 //
-//  RepositoryCenter+Api.swift
+//  RepositoryCenter+Downloader.swift
 //  Chromatic
 //
 //  Created by Lakr Aream on 2021/8/6.
@@ -10,7 +10,7 @@ import Dog
 import Foundation
 import SWCompression
 
-internal extension RepositoryCenter {
+extension RepositoryCenter {
     // MARK: - Downloader
 
     /// download data and wait, header is injected from networkingHeaders, timeout is used with networkingTimeout
@@ -22,7 +22,7 @@ internal extension RepositoryCenter {
             cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
             timeoutInterval: TimeInterval(networkingTimeout)
         )
-        networkingHeaders.forEach { key, value in
+        for (key, value) in networkingHeaders {
             request.setValue(value, forHTTPHeaderField: key)
         }
         var returningData: Data?

@@ -35,11 +35,10 @@ extension InstalledController {
                 let lastModifiedDate = PackageCenter
                     .default
                     .obtainLastModification(for: item.identity, and: .install)
-                var section: String
-                if let lastModifiedDate {
-                    section = formatter.string(from: lastModifiedDate)
+                var section: String = if let lastModifiedDate {
+                    formatter.string(from: lastModifiedDate)
                 } else {
-                    section = NSLocalizedString("NOT_MODIFIED", comment: "Not Modified")
+                    NSLocalizedString("NOT_MODIFIED", comment: "Not Modified")
                 }
                 var sectionBuilder = builder[lastModifiedDate, default: InstalledData(section: section, package: [])]
                 sectionBuilder.package.append(item)

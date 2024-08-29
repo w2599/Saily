@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PlatformSetup : NSObject
 
 + (void)giveMeRoot;
++ (void)giveMeNetwork;
 
 @end
 

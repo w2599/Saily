@@ -32,20 +32,20 @@ import UIKit
 private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
     case let (l?, r?):
-        return l < r
+        l < r
     case (nil, _?):
-        return true
+        true
     default:
-        return false
+        false
     }
 }
 
 private func >= <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
     case let (l?, r?):
-        return l >= r
+        l >= r
     default:
-        return !(lhs < rhs)
+        !(lhs < rhs)
     }
 }
 

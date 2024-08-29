@@ -9,9 +9,9 @@
 
 import UIKit
 
-internal protocol FeaturedViewDelegate: DepictionViewDelegate {}
+protocol FeaturedViewDelegate: DepictionViewDelegate {}
 
-internal class FeaturedBaseView: DepictionBaseView {
+class FeaturedBaseView: DepictionBaseView {
     @objc override class func view(dictionary: [String: Any], viewController: UIViewController, tintColor: UIColor?, isActionable: Bool) -> DepictionBaseView? {
         guard let className = dictionary["class"] as? String else {
             return nil

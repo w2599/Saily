@@ -1,5 +1,6 @@
 #if os(iOS) || os(tvOS)
     import UIKit
+
     typealias View = UIView
     extension View {
         var snp_constraints: [AnyObject] {
@@ -10,6 +11,7 @@
     }
 #else
     import AppKit
+
     typealias View = NSView
     extension View {
         var snp_constraints: [AnyObject] {

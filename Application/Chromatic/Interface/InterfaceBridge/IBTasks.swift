@@ -1,5 +1,5 @@
 //
-//  TaskButton.swift
+//  IBTasks.swift
 //  Chromatic
 //
 //  Created by Lakr Aream on 2021/8/29.
@@ -167,7 +167,8 @@ extension InterfaceBridge {
                                           message: NSLocalizedString("ESSENTIAL_PACKAG_IN_REMOVE_QUEUE", comment: "Essential package in removal queue, this may brick your device."),
                                           preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("PROCEED", comment: "Proceed"),
-                                          style: .destructive) { _ in
+                                          style: .destructive)
+                { _ in
                     confirmOperations()
                 })
             alert.addAction(UIAlertAction(title: NSLocalizedString("CANCEL", comment: "Cancel"),

@@ -149,8 +149,8 @@ class XZTests: XCTestCase {
         XCTAssertTrue(thrownError is XZError, "Unexpected error type: \(type(of: thrownError))")
         if case let .some(.wrongCheck(decompressedData)) = thrownError as? XZError {
             XCTAssertEqual(decompressedData.count, 2)
-            var answerData = [try Constants.data(forAnswer: "test1")]
-            answerData.append(try Constants.data(forAnswer: "test2"))
+            var answerData = try [Constants.data(forAnswer: "test1")]
+            try answerData.append(Constants.data(forAnswer: "test2"))
             XCTAssertEqual(decompressedData, answerData)
         } else {
             XCTFail("Unexpected error: \(String(describing: thrownError))")

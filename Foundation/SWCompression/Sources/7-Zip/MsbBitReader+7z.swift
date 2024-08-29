@@ -27,11 +27,10 @@ extension MsbBitReader {
     func defBits(count: Int) -> [UInt8] {
         align()
         let allDefined = byte()
-        let definedBits: [UInt8]
-        if allDefined == 0 {
-            definedBits = bits(count: count)
+        let definedBits: [UInt8] = if allDefined == 0 {
+            bits(count: count)
         } else {
-            definedBits = Array(repeating: 1, count: count)
+            Array(repeating: 1, count: count)
         }
         return definedBits
     }

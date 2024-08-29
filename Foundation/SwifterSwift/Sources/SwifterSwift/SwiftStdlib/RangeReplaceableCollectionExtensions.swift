@@ -18,7 +18,7 @@ public extension RangeReplaceableCollection {
         if count > 0 {
             reserveCapacity(count)
             while self.count < count {
-                append(try expression())
+                try append(expression())
             }
         }
     }
@@ -109,7 +109,7 @@ public extension RangeReplaceableCollection {
     /// - Parameter condition: condition to evaluate each element against.
     /// - Returns: All elements up until condition evaluates to false.
     func take(while condition: (Element) throws -> Bool) rethrows -> Self {
-        Self(try prefix(while: condition))
+        try Self(prefix(while: condition))
     }
 
     /// SwifterSwift: Skip elements of Array while condition is true.

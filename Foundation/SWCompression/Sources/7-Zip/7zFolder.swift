@@ -53,7 +53,7 @@ class SevenZipFolder {
         numBindPairs = totalOutputStreams - 1
         if numBindPairs > 0 {
             for _ in 0 ..< numBindPairs {
-                bindPairs.append(try BindPair(bitReader))
+                try bindPairs.append(BindPair(bitReader))
             }
         }
 

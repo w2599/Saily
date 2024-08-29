@@ -8,11 +8,11 @@
 
 import UIKit
 
-internal protocol CSTextViewActionHandler {
+protocol CSTextViewActionHandler {
     func process(action: String) -> Bool
 }
 
-internal class CSTextView: UIView, CSTextViewActionHandler {
+class CSTextView: UIView, CSTextViewActionHandler {
     public var attributedText: NSAttributedString? {
         set {
             renderView.attributedText = newValue
@@ -59,7 +59,7 @@ internal class CSTextView: UIView, CSTextViewActionHandler {
     }
 }
 
-internal class CSTextRenderView: UIView {
+class CSTextRenderView: UIView {
     private var links: [[String: Any]] = []
     private var linkActive: Bool = false
     private var activeLink: [String: Any] = [:]
@@ -77,9 +77,9 @@ internal class CSTextRenderView: UIView {
 
     var attributedText: NSAttributedString? {
         didSet {
-            self.isAccessibilityElement = true
-            self.accessibilityLabel = self.attributedText?.string
-            self.accessibilityTraits = .staticText
+            isAccessibilityElement = true
+            accessibilityLabel = attributedText?.string
+            accessibilityTraits = .staticText
         }
     }
 

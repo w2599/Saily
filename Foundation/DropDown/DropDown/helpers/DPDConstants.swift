@@ -1,5 +1,5 @@
 //
-//  Constants.swift
+//  DPDConstants.swift
 //  DropDown
 //
 //  Created by Kevin Hirsch on 28/07/15.
@@ -10,16 +10,16 @@
 
     import UIKit
 
-    internal enum DPDConstant {
-        internal enum KeyPath {
+    enum DPDConstant {
+        enum KeyPath {
             static let Frame = "frame"
         }
 
-        internal enum ReusableIdentifier {
+        enum ReusableIdentifier {
             static let DropDownCell = "DropDownCell"
         }
 
-        internal enum UI {
+        enum UI {
             static let TextColor = UIColor.black
             static let SelectedTextColor = UIColor.black
             static let TextFont = UIFont.systemFont(ofSize: 15)
@@ -38,7 +38,7 @@
             }
         }
 
-        internal enum Animation {
+        enum Animation {
             static let Duration = 0.15
             static let EntranceOptions: UIView.AnimationOptions = [.allowUserInteraction, .curveEaseOut]
             static let ExitOptions: UIView.AnimationOptions = [.allowUserInteraction, .curveEaseIn]

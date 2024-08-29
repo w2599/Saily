@@ -13,9 +13,9 @@ struct CodeLength: Equatable {
 extension CodeLength: Comparable {
     static func < (left: CodeLength, right: CodeLength) -> Bool {
         if left.codeLength == right.codeLength {
-            return left.symbol < right.symbol
+            left.symbol < right.symbol
         } else {
-            return left.codeLength < right.codeLength
+            left.codeLength < right.codeLength
         }
     }
 }

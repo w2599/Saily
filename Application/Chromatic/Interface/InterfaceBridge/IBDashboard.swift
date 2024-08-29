@@ -189,7 +189,8 @@ extension InterfaceBridge {
         }
         return DashboardDataSection(title: NSLocalizedString("RECENT_UPDATE", comment: "Recent Update"),
                                     package: builder,
-                                    shouldLimit: true) { controller in
+                                    shouldLimit: true)
+        { controller in
             var list = PackageCenter
                 .default
                 .obtainRecentUpdatedList()

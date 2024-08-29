@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "50D528B72449B11300F4A483"
-               BuildableName = "chromatic.app"
-               BlueprintName = "Chromatic"
+               BlueprintIdentifier = "507D4AA52C8063F300CA34C5"
+               BuildableName = "Chromatic.Sim.app"
+               BlueprintName = "Chromatic.Sim"
                ReferencedContainer = "container:Chromatic.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,9 +44,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "50D528B72449B11300F4A483"
-            BuildableName = "chromatic.app"
-            BlueprintName = "Chromatic"
+            BlueprintIdentifier = "507D4AA52C8063F300CA34C5"
+            BuildableName = "Chromatic.Sim.app"
+            BlueprintName = "Chromatic.Sim"
             ReferencedContainer = "container:Chromatic.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -61,9 +61,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "50D528B72449B11300F4A483"
-            BuildableName = "chromatic.app"
-            BlueprintName = "Chromatic"
+            BlueprintIdentifier = "507D4AA52C8063F300CA34C5"
+            BuildableName = "Chromatic.Sim.app"
+            BlueprintName = "Chromatic.Sim"
             ReferencedContainer = "container:Chromatic.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

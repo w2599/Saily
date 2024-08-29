@@ -168,11 +168,12 @@ class SearchCell: UITableViewCell {
                 .shared
                 .loadImage(with: iconUrl,
                            options: .highPriority,
-                           progress: nil) { [weak self] img, _, _, _, _, _ in
-                    if let img, self?.displayToken == token {
-                        self?.image.image = img
-                    }
+                           progress: nil)
+            { [weak self] img, _, _, _, _, _ in
+                if let img, self?.displayToken == token {
+                    self?.image.image = img
                 }
+            }
         }
     }
 }

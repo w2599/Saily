@@ -124,8 +124,8 @@ class RepoPaymentView: UIView {
                         let avatar = UIImageView()
                         let title = UILabel()
 
-                        self.addSubview(avatar)
-                        self.addSubview(title)
+                        addSubview(avatar)
+                        addSubview(title)
 
                         let avatarSize = 30
                         avatar.layer.cornerRadius = 8
@@ -175,8 +175,8 @@ class RepoPaymentView: UIView {
                         } else {
                             title.text = repo.nickName
                         }
-                        self.xjh.stopAnimating()
-                        self.xjh.isHidden = true
+                        xjh.stopAnimating()
+                        xjh.isHidden = true
                     }
                 }
                 .resume()
@@ -203,7 +203,8 @@ class RepoPaymentView: UIView {
         if userInfo == nil {
             PaymentManager.shared.startUserAuthenticate(window: window ?? UIWindow(),
                                                         controller: parentViewController,
-                                                        repoUrl: repo.url) {
+                                                        repoUrl: repo.url)
+            {
                 DispatchQueue.main.async { [weak self] in
                     self?.updateIndicator()
                 }

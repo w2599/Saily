@@ -11,11 +11,13 @@
     #if canImport(UIKit)
 
         import UIKit
+
         public typealias TextView = UITextView
 
     #elseif canImport(AppKit)
 
         import AppKit
+
         public typealias TextView = NSTextView
 
     #endif

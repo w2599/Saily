@@ -12,48 +12,48 @@ import UIKit
 
 class PackageBannerView: UIView {
     let package: Package
-    
+
     var icon = UIImageView()
     var name = UILabel()
     var version = UILabel()
-    
+
     let padding = 15
-    
+
     var button = UIButton()
     let buttonBackground = UIView()
     let buttonAnchor = UIView()
-    
+
     init(package: Package) {
-        if(package.identity == "" ){
+        if package.identity == "" {
             self.package = package
-        }else{
+        } else {
             if let installInfo = PackageCenter
                 .default
-                .obtainPackageInstallationInfo(with: package.identity){
+                .obtainPackageInstallationInfo(with: package.identity)
+            {
                 let updatePackages = PackageCenter
                     .default
                     .obtainUpdateForPackage(with: installInfo.identity,
                                             version: installInfo.version)
-                if updatePackages.count > 0
-                {
+                if updatePackages.count > 0 {
                     self.package = updatePackages[0]
-                }else{
+                } else {
                     self.package = package
                 }
-            }else{
+            } else {
                 self.package = package
             }
         }
-        
+
         super.init(frame: CGRect())
-        
+
         addSubview(icon)
         addSubview(name)
         addSubview(version)
         addSubview(buttonBackground)
         addSubview(button)
         addSubview(buttonAnchor)
-        
+
         icon.clipsToBounds = true
         icon.layer.cornerRadius = 8
         icon.contentMode = .scaleAspectFill
@@ -65,7 +65,7 @@ class PackageBannerView: UIView {
         name.adjustsFontSizeToFitWidth = true
         version.textColor = UIColor(named: "TEXT_SUBTITLE")
         version.font = .boldSystemFont(ofSize: 14)
-        
+
         icon.snp.makeConstraints { x in
             x.centerY.equalToSuperview()
             x.left.equalToSuperview().offset(padding)
@@ -82,7 +82,7 @@ class PackageBannerView: UIView {
             x.top.equalTo(icon.snp.centerY).offset(4)
             x.right.equalTo(button.snp.left).offset(-8)
         }
-        
+
         button.titleLabel?.numberOfLines = 1
         button.titleLabel?.minimumScaleFactor = 0.2
         button.titleLabel?.lineBreakMode = .byClipping
@@ -90,11 +90,11 @@ class PackageBannerView: UIView {
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(.gray, for: .highlighted)
         // 安装增加长按菜单，短按就直接安装
-        if(InterfaceBridge.enableQuickMode){
+        if InterfaceBridge.enableQuickMode {
             button.addTarget(self, action: #selector(dropDownActionListQuick), for: .touchUpInside)
             let mLongClick = UILongPressGestureRecognizer(target: self, action: #selector(dropDownActionList)) // 事件对象
             button.addGestureRecognizer(mLongClick)
-        }else{
+        } else {
             button.addTarget(self, action: #selector(dropDownActionList), for: .touchUpInside)
         }
         button.snp.makeConstraints { x in
@@ -117,29 +117,29 @@ class PackageBannerView: UIView {
             x.height.equalTo(2)
             x.width.equalTo(250)
         }
-        
+
         updateValues()
-        
+
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateValues),
                                                name: .TaskContainerChanged,
                                                object: nil)
     }
-    
+
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError() }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     @objc
     func updateValues() {
         name.text = PackageCenter.default.name(of: package)
         version.text = package.latestVersion ?? "0.0.0.???"
         icon.image = UIImage(named: "PackageDefaultIcon")
         button.setTitle(grabButtonString(), for: .normal)
-        
+
         // now we need to update button size from localized string
         var width = button.intrinsicContentSize.width
         if width < 50 { width = 50 }
@@ -155,20 +155,21 @@ class PackageBannerView: UIView {
             }
             self.button.layoutIfNeeded()
         } completion: { _ in }
-        
+
         if let iconUrl = PackageCenter.default.avatarUrl(with: package) {
             SDWebImageManager
                 .shared
                 .loadImage(with: iconUrl,
                            options: .highPriority,
-                           progress: nil) { [weak self] img, _, _, _, _, _ in
-                    if let img {
-                        self?.icon.image = img
-                    }
+                           progress: nil)
+            { [weak self] img, _, _, _, _, _ in
+                if let img {
+                    self?.icon.image = img
                 }
+            }
         }
     }
-    
+
     func grabButtonString() -> String {
         if TaskManager.shared.isQueueContains(package: package.identity) {
             return NSLocalizedString("QUEUED", comment: "Queued").uppercased()
@@ -188,8 +189,8 @@ class PackageBannerView: UIView {
         // 如果是已经安装的，需要看一下action里面的第一个是什么，可能是删除，也可能是更新
         return getButtonStringFromActions() //  NSLocalizedString("OPTION", comment: "Option").uppercased()
     }
-    
-    func getButtonStringFromActions() -> String{
+
+    func getButtonStringFromActions() -> String {
         let actions = PackageMenuAction
             .allMenuActions
             .filter { $0.elegantForPerform(package) }

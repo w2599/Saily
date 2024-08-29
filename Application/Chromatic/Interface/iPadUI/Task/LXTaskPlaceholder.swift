@@ -41,8 +41,7 @@ class LXTaskPlaceholder: UIView {
             x.height.equalTo(0)
         }
 
-        payloads.forEach { guid in
-
+        for guid in payloads {
             let text = UILabel(text: guid.text)
             let image = UIImageView(image: guid.icon)
             addSubview(image)

@@ -118,12 +118,12 @@ class LXMainController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
             guard let self else { return }
             // check if there is no view controller exists
-            let top = self.navigationController?.topViewController
+            let top = navigationController?.topViewController
             if top == self { // fatal if nil, don't handle it
-                if let notification = self.lastNotification {
-                    self.presentNewRootController(withNotification: notification)
+                if let notification = lastNotification {
+                    presentNewRootController(withNotification: notification)
                 } else {
-                    self.presentNewRootController(withNotification: Notification(name: .LXMainControllerSwitchDashboard))
+                    presentNewRootController(withNotification: Notification(name: .LXMainControllerSwitchDashboard))
                 }
             }
         }

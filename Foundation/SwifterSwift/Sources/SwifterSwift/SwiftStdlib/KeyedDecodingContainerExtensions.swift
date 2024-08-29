@@ -13,11 +13,11 @@ public extension KeyedDecodingContainer {
         /// - Throws: Decoding error.
         func decodeBoolAsIntOrString(forKey key: Key) throws -> Bool {
             if let intValue = try? decode(Int.self, forKey: key) {
-                return (intValue as NSNumber).boolValue
+                (intValue as NSNumber).boolValue
             } else if let stringValue = try? decode(String.self, forKey: key) {
-                return (stringValue as NSString).boolValue
+                (stringValue as NSString).boolValue
             } else {
-                return try decode(Bool.self, forKey: key)
+                try decode(Bool.self, forKey: key)
             }
         }
     #endif
@@ -30,11 +30,11 @@ public extension KeyedDecodingContainer {
         /// - Throws: Decoding error.
         func decodeBoolAsIntOrStringIfPresent(forKey key: Key) throws -> Bool? {
             if let intValue = try? decodeIfPresent(Int.self, forKey: key) {
-                return (intValue as NSNumber).boolValue
+                (intValue as NSNumber).boolValue
             } else if let stringValue = try? decodeIfPresent(String.self, forKey: key) {
-                return (stringValue as NSString).boolValue
+                (stringValue as NSString).boolValue
             } else {
-                return try decodeIfPresent(Bool.self, forKey: key)
+                try decodeIfPresent(Bool.self, forKey: key)
             }
         }
     #endif

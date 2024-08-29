@@ -26,7 +26,7 @@ enum InterfaceBridge {
 
     @PropertiesWrapper(key: "enableShareSheet", defaultValue: false)
     public static var enableShareSheet: Bool
-    
+
     @PropertiesWrapper(key: "enableQuickMode", defaultValue: true)
     public static var enableQuickMode: Bool
 
@@ -47,17 +47,17 @@ public extension PackageDepiction.PreferredDepiction {
     func localizedDescription() -> String {
         switch self {
         case .automatically:
-            return NSLocalizedString("AUTOMATICALLY", comment: "Automatically")
+            NSLocalizedString("AUTOMATICALLY", comment: "Automatically")
         case .preferredNative:
-            return NSLocalizedString("NATIVE", comment: "Native")
+            NSLocalizedString("NATIVE", comment: "Native")
         case .preferredWeb:
-            return NSLocalizedString("WEB", comment: "Web")
+            NSLocalizedString("WEB", comment: "Web")
         case .onlyNative:
-            return NSLocalizedString("ONLY_NATIVE", comment: "Native Only")
+            NSLocalizedString("ONLY_NATIVE", comment: "Native Only")
         case .onlyWeb:
-            return NSLocalizedString("ONLY_WEB", comment: "Web Only")
+            NSLocalizedString("ONLY_WEB", comment: "Web Only")
         case .never:
-            return NSLocalizedString("NONE", comment: "None")
+            NSLocalizedString("NONE", comment: "None")
         }
     }
 }

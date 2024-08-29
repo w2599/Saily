@@ -16,28 +16,27 @@ extension TarEntry {
 
         let name = inputURL.relativePath
 
-        let entryType: ContainerEntryType
-        if let typeFromAttributes = fileAttributes[.type] as? FileAttributeType {
+        let entryType: ContainerEntryType = if let typeFromAttributes = fileAttributes[.type] as? FileAttributeType {
             switch typeFromAttributes {
             case .typeBlockSpecial:
-                entryType = .blockSpecial
+                .blockSpecial
             case .typeCharacterSpecial:
-                entryType = .characterSpecial
+                .characterSpecial
             case .typeDirectory:
-                entryType = .directory
+                .directory
             case .typeRegular:
-                entryType = .regular
+                .regular
             case .typeSocket:
-                entryType = .socket
+                .socket
             case .typeSymbolicLink:
-                entryType = .symbolicLink
+                .symbolicLink
             case .typeUnknown:
-                entryType = .unknown
+                .unknown
             default:
-                entryType = .unknown
+                .unknown
             }
         } else {
-            entryType = .unknown
+            .unknown
         }
 
         var info = TarEntryInfo(name: name, type: entryType)
@@ -84,7 +83,7 @@ extension TarEntry {
 
         if entryType == .directory {
             for subPath in try fileManager.contentsOfDirectory(atPath: inputPath) {
-                entries.append(contentsOf: try createEntries(inputURL.appendingPathComponent(subPath).relativePath,
+                try entries.append(contentsOf: createEntries(inputURL.appendingPathComponent(subPath).relativePath,
                                                              verbose))
             }
         }
@@ -100,28 +99,27 @@ extension TarEntry {
 
         let name = inputURL.relativePath
 
-        let entryType: ContainerEntryType
-        if let typeFromAttributes = fileAttributes[.type] as? FileAttributeType {
+        let entryType: ContainerEntryType = if let typeFromAttributes = fileAttributes[.type] as? FileAttributeType {
             switch typeFromAttributes {
             case .typeBlockSpecial:
-                entryType = .blockSpecial
+                .blockSpecial
             case .typeCharacterSpecial:
-                entryType = .characterSpecial
+                .characterSpecial
             case .typeDirectory:
-                entryType = .directory
+                .directory
             case .typeRegular:
-                entryType = .regular
+                .regular
             case .typeSocket:
-                entryType = .socket
+                .socket
             case .typeSymbolicLink:
-                entryType = .symbolicLink
+                .symbolicLink
             case .typeUnknown:
-                entryType = .unknown
+                .unknown
             default:
-                entryType = .unknown
+                .unknown
             }
         } else {
-            entryType = .unknown
+            .unknown
         }
 
         var info = TarEntryInfo(name: name, type: entryType)

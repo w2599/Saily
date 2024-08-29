@@ -88,10 +88,10 @@ class RamLogController: UIViewController {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] _ in
             guard let self else { return }
             let read = Dog.shared.obtainCurrentLogContent()
-            if read != self.textView.text {
-                self.textView.text = read
-                let bottom = NSMakeRange(self.textView.text.count - 1, 1)
-                self.textView.scrollRangeToVisible(bottom)
+            if read != textView.text {
+                textView.text = read
+                let bottom = NSMakeRange(textView.text.count - 1, 1)
+                textView.scrollRangeToVisible(bottom)
             }
         })
         timer?.fire()

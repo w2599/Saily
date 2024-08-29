@@ -166,12 +166,11 @@ public extension PackageCenter {
     /// - Returns: date for last modification, nil if not modified or found
     func obtainLastModification(for identity: String, and table: RecordTable) -> Date? {
         accessLock.lock()
-        var date: Date?
-        switch table {
+        var date: Date? = switch table {
         case .install:
-            date = installationTrace[identity]?.lastModification
+            installationTrace[identity]?.lastModification
         case .repo:
-            date = tableTrace[identity]?.lastModification
+            tableTrace[identity]?.lastModification
         }
         accessLock.unlock()
         return date

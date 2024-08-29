@@ -31,7 +31,8 @@ extension SettingView {
 //        backgroundEffect.dropShadow()
         let openDownloadedPackages = SettingElement(iconSystemNamed: "tray.full",
                                                     text: NSLocalizedString("OPEN_DOWNLOAD", comment: "Open Download"),
-                                                    dataType: .submenuWithAction, initData: nil) { _, _ in
+                                                    dataType: .submenuWithAction, initData: nil)
+        { _, _ in
             let urlString = "filza://" + CariolNetwork.shared.workingLocation.path
             if let url = URL(string: urlString),
                UIApplication.shared.canOpenURL(url)
@@ -105,7 +106,8 @@ extension SettingView {
                                            })
         let preferredDepiction = SettingElement(iconSystemNamed: "barcode.viewfinder",
                                                 text: NSLocalizedString("DEPICTION", comment: "Depiction"),
-                                                dataType: .submenuWithAction) {
+                                                dataType: .submenuWithAction)
+        {
             PackageCenter.default.preferredDepiction.localizedDescription()
         } withAction: { _, dropDownAnchor in
             let dropDownDataSource = PackageDepiction

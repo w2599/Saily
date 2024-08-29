@@ -11,11 +11,11 @@ import Foundation
 
 // Dog_2021-03-01_22-10-43_ACAF51D1.log
 
-internal let loggingPrefix = "Dog"
-internal let loggingFormatter = "yyyy-MM-dd_HH-mm-ss"
-internal let loggingRndSuffix = "AAAAAAAA"
-internal let loggingSuffix = "log"
-internal let cLogFilenameLenth = [
+let loggingPrefix = "Dog"
+let loggingFormatter = "yyyy-MM-dd_HH-mm-ss"
+let loggingRndSuffix = "AAAAAAAA"
+let loggingSuffix = "log"
+let cLogFilenameLenth = [
     loggingPrefix, "_",
     loggingFormatter, "_",
     loggingRndSuffix, ".",
@@ -52,14 +52,14 @@ public final class Dog {
     }
 
     /// the place we save our logs
-    internal static let dirBase = "Journal"
+    static let dirBase = "Journal"
 
     /// shared
     public static let shared = Dog()
 
     public internal(set) var currentLogFileLocation: URL?
     public internal(set) var currentLogFileDirLocation: URL?
-    internal var logFileHandler: FileHandle? {
+    var logFileHandler: FileHandle? {
         didSet {
             #if DEBUG
                 if let oldValue {
@@ -70,13 +70,13 @@ public final class Dog {
     }
 
     /// Thread Safe
-    internal let executionLock = NSLock()
+    let executionLock = NSLock()
 
     /// grouped tagging
-    internal var lastTag: String?
+    var lastTag: String?
 
     /// date formatter for log name
-    internal var formatter: DateFormatter = {
+    var formatter: DateFormatter = {
         let initDateFormatter = DateFormatter()
         initDateFormatter.dateFormat = loggingFormatter
         return initDateFormatter

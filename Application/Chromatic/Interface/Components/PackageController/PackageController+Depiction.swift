@@ -97,8 +97,8 @@ extension PackageController {
                                     { [weak self] image, _, _, _, _, _ in
                                         guard let self else { return }
                                         if let image {
-                                            self.bannerImageView.image = image
-                                            self.bannerImageIconView.isHidden = true
+                                            bannerImageView.image = image
+                                            bannerImageIconView.isHidden = true
                                         }
                                     }
                                 }

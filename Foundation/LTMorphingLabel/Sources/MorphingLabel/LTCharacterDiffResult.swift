@@ -38,17 +38,17 @@ public enum LTCharacterDiffResult: CustomDebugStringConvertible, Equatable {
     public var debugDescription: String {
         switch self {
         case .same:
-            return "The character is unchanged."
+            "The character is unchanged."
         case .add:
-            return "A new character is ADDED."
+            "A new character is ADDED."
         case .delete:
-            return "The character is DELETED."
+            "The character is DELETED."
         case let .move(offset):
-            return "The character is MOVED to \(offset)."
+            "The character is MOVED to \(offset)."
         case let .moveAndAdd(offset):
-            return "The character is MOVED to \(offset) and a new character is ADDED."
+            "The character is MOVED to \(offset) and a new character is ADDED."
         case .replace:
-            return "The character is REPLACED with a new character."
+            "The character is REPLACED with a new character."
         }
     }
 }
@@ -56,23 +56,23 @@ public enum LTCharacterDiffResult: CustomDebugStringConvertible, Equatable {
 public func == (lhs: LTCharacterDiffResult, rhs: LTCharacterDiffResult) -> Bool {
     switch (lhs, rhs) {
     case let (.move(offset0), .move(offset1)):
-        return offset0 == offset1
+        offset0 == offset1
 
     case let (.moveAndAdd(offset0), .moveAndAdd(offset1)):
-        return offset0 == offset1
+        offset0 == offset1
 
     case (.add, .add):
-        return true
+        true
 
     case (.delete, .delete):
-        return true
+        true
 
     case (.replace, .replace):
-        return true
+        true
 
     case (.same, .same):
-        return true
+        true
 
-    default: return false
+    default: false
     }
 }

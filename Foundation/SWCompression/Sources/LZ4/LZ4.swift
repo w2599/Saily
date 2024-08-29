@@ -179,7 +179,7 @@ public enum LZ4: DecompressionAlgorithm {
             let blockData = data[reader.offset ..< reader.offset + blockSize]
             reader.offset += blockSize
 
-            out.append(Data(try LZ4.process(block: blockData)))
+            try out.append(Data(LZ4.process(block: blockData)))
         }
         return (out, reader.offset)
     }
@@ -301,13 +301,13 @@ public enum LZ4: DecompressionAlgorithm {
 
             if compressed {
                 if independentBlocks {
-                    out.append(Data(try LZ4.process(block: blockData, dictionary)))
+                    try out.append(Data(LZ4.process(block: blockData, dictionary)))
                 } else {
                     if out.isEmpty, let dictionary {
-                        out.append(Data(try LZ4.process(block: blockData,
+                        try out.append(Data(LZ4.process(block: blockData,
                                                         dictionary[max(dictionary.endIndex - 64 * 1024, dictionary.startIndex)...])))
                     } else {
-                        out.append(Data(try LZ4.process(block: blockData,
+                        try out.append(Data(LZ4.process(block: blockData,
                                                         out[max(out.endIndex - 64 * 1024, out.startIndex)...])))
                     }
                 }

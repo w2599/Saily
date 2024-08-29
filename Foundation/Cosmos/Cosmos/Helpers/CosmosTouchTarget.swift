@@ -6,7 +6,7 @@ import UIKit
  The function is used in pointInside(point: CGPoint, withEvent event: UIEvent?) of UIImageView.
 
  */
-struct CosmosTouchTarget {
+enum CosmosTouchTarget {
     static func optimize(_ bounds: CGRect) -> CGRect {
         let recommendedHitSize: CGFloat = 44
 

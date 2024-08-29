@@ -2,10 +2,12 @@
 
 #if os(iOS) || os(tvOS) || os(watchOS)
     import UIKit
+
     /// SwifterSwift: EdgeInsets
     public typealias EdgeInsets = UIEdgeInsets
 #elseif os(macOS)
     import Foundation
+
     /// SwifterSwift: EdgeInsets
     public typealias EdgeInsets = NSEdgeInsets
 

@@ -46,6 +46,9 @@
 /* Block Update */
 "BLOCK_UPDATE" = "Blocca aggiornamento";
 
+/* Block Update All (By.zp) */
+"BLOCK_UPDATE_ALL" = "Blocca tutti gli aggiornamenti";
+
 /* Broken Repo Removed */
 "BROKEN_REPO_REMOVED" = "Sorgenti corrotte rimosse";
 
@@ -72,6 +75,9 @@
 
 /* Close */
 "CLOSE" = "Chiudi";
+
+/* No comment provided by engineer. */
+"Close" = "Chiudi";
 
 /* Collect And Overwrite */
 "COLLECT_AND_OVERWRITE" = "Raccogli e sovrascrivi";
@@ -102,9 +108,6 @@
 
 /* Copy Meta */
 "COPY_META" = "Copia Meta";
-
-/* Copy Script */
-"COPY_SCRIPT" = "Copy Script";
 
 /* Current Installed */
 "CURRENT_INSTALLED" = "Attualmente installati";
@@ -151,6 +154,9 @@
 /* Done */
 "DONE" = "Fatto";
 
+/* No comment provided by engineer. */
+"Double tap to open." = "Doppio tocco per aprire";
+
 /* Downgrade */
 "DOWNGRADE" = "Downgrade";
 
@@ -171,6 +177,9 @@
 
 /* Enable History */
 "ENABLE_HISTORY" = "Attiva cronologia";
+
+/* Enable Quick Mode */
+"ENABLE_QUICK_MODE" = "Abilita modalità veloce";
 
 /* Enable random device info will disable commercial operations */
 "ENABLE_RANDOM_DEVICE_INFO_WILL_DISABLE_COMMERCIAL_OPERATIONS" = "Abilitando le informazioni casuali del dispositivo verranno disattivate le operazioni commerciali";
@@ -232,11 +241,17 @@
 /* Install */
 "INSTALL" = "Installa";
 
+/* Install All (By.zp) */
+"INSTALL_ALL" = "Installa tutto";
+
 /* Installation Info Refreshed */
 "INSTALLATION_INFO_REFRESHED" = "Info di Installazione Aggiornate";
 
 /* Installed */
 "INSTALLED" = "Installato";
+
+/* No comment provided by engineer. */
+"Invalid URL" = "URL non valido";
 
 /* Last Modification */
 "LAST_MODIFICATION" = "Ultima modifica";
@@ -336,6 +351,9 @@
 
 /* We found these links in the clipboard, they may be the source of the software */
 "PASTEBOARD_REPO_DESCRIPTION" = "Abbiamo trovato questi link negli appunti, potrebbero essere la sorgente del software";
+
+/* No comment provided by engineer. */
+"Path List Viewer" = "Visualizzatore dell'elenco dei percorsi";
 
 /* Press add button above to add some */
 "PLEASE_ADD_REPO" = "Premi il pulsante di aggiunta sopra per aggiungerne alcune";
@@ -507,6 +525,9 @@
 
 /* This operation cannot be undone */
 "THIS_OPERATION_CANNOT_BE_UNDONE" = "Questa operazione non può essere annullata.";
+
+/* Please search - long press [package list] - overwrite collection */
+"TIPS1" = "Per favore, cerca - premi a lungo su [lista pacchetti] - sovrascrivi collezione";
 
 /* Toggle */
 "TOGGLE" = "Aziona";

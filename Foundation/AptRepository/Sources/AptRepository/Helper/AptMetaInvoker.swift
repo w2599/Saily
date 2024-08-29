@@ -15,7 +15,7 @@ import Foundation
 ///   - original: parser, string
 ///   - fromRepo: repo reference
 /// - Returns: container
-internal func invokePackages(withContext original: String, fromRepo: URL? = nil) -> [String: Package] {
+func invokePackages(withContext original: String, fromRepo: URL? = nil) -> [String: Package] {
     var resultBuilder = [String: Package]()
     original
         .replacingOccurrences(of: "\r\n", with: "\n")
@@ -34,7 +34,7 @@ internal func invokePackages(withContext original: String, fromRepo: URL? = nil)
                 debugPrint(metadata)
                 return
             }
-            guard let  architecture = metadata["architecture"], architecture != "iphoneos-arm", architecture != "iphoneos-arm64e" else { return }
+            guard let architecture = metadata["architecture"], architecture != "iphoneos-arm", architecture != "iphoneos-arm64e" else { return }
             if let package = resultBuilder[id] {
                 var newpayload = package.payload
                 newpayload[ver] = metadata
@@ -54,7 +54,7 @@ internal func invokePackages(withContext original: String, fromRepo: URL? = nil)
 /// invoke all apt metadata, usually packages
 /// - Parameter original: parser, string
 /// - Returns: invoked metadata if success, otherwise it would be empty but sure it exists
-internal func invokeAptMeta(withContext original: String) -> [[String: String]] {
+func invokeAptMeta(withContext original: String) -> [[String: String]] {
     original
         .replacingOccurrences(of: "\r\n", with: "\n")
         .replacingOccurrences(of: "\r", with: "\n")
@@ -68,7 +68,7 @@ internal func invokeAptMeta(withContext original: String) -> [[String: String]] 
 /// invoke single apt metadata
 /// - Parameter original: parser, string
 /// - Returns: invoked metadata if success, requires at least one component
-internal func invokeSingleAptMeta(withContext original: String) -> [String: String]? {
+func invokeSingleAptMeta(withContext original: String) -> [String: String]? {
     var resultBuilder = [String: String]()
     var lastBuildingKey: String?
     original

@@ -1,5 +1,5 @@
 //
-//  TaskMaster.swift
+//  TaskManager.swift
 //  Chromatic
 //
 //  Created by Lakr Aream on 2021/8/19.
@@ -12,7 +12,7 @@ import Foundation
 import PropertyWrapper
 import SwiftThrottle
 
-internal final class TaskManager {
+final class TaskManager {
     static let shared = TaskManager()
     private init() {
         NotificationCenter.default.addObserver(self,

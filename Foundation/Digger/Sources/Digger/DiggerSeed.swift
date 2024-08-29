@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 public typealias ProgressCallback = (_ progress: Progress) -> Void
 
 public typealias SpeedCallback = (_ speedBytes: Int64) -> Void

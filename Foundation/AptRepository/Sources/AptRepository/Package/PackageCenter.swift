@@ -11,7 +11,7 @@ import Foundation
 import PropertyWrapper
 import SwiftThrottle
 
-internal let kPackageCenterIdentity = "wiki.qaq.chromatic.PackageCenter"
+let kPackageCenterIdentity = "wiki.qaq.chromatic.PackageCenter"
 
 /// Repository Center is used to manage any software distribution sources
 public final class PackageCenter {
@@ -25,8 +25,8 @@ public final class PackageCenter {
     public internal(set) var systemPackageStatusLocation = "/Library/dpkg/status"
 
     /// local packages
-    internal var accessLock = NSLock()
-    internal var localInstalled: [String: Package] = [:]
+    var accessLock = NSLock()
+    var localInstalled: [String: Package] = [:]
 
     // MARK: - PACKAGE TABLE
 
@@ -43,19 +43,19 @@ public final class PackageCenter {
     }
 
     /// store builded container from repository
-    internal var summary: [String: [URL: Package]] = [:]
-    internal var authers: [String: Set<String>] = [:]
+    var summary: [String: [URL: Package]] = [:]
+    var authers: [String: Set<String>] = [:]
 
     /// virtual represents provided section in package metadata
     /// this one won't have 100% accuracy since we only need a reference
     /// thus, we can search for it quickly
     /// if package not found, discard this record
     ///                    vpkgid     references by pkgid
-    internal var virtual: [String: Set<String>] = [:]
+    var virtual: [String: Set<String>] = [:]
 
     /// reloads behavior control
-    @Atomic internal var summaryReloadToken = UUID()
-    internal let reloadQueue = DispatchQueue(label: "\(kPackageCenterIdentity).compiler")
+    @Atomic var summaryReloadToken = UUID()
+    let reloadQueue = DispatchQueue(label: "\(kPackageCenterIdentity).compiler")
 
     // MARK: - RECORDS
 
@@ -76,7 +76,7 @@ public final class PackageCenter {
         case repo
     }
 
-    @Atomic internal var traceToken = UUID()
+    @Atomic var traceToken = UUID()
     /*
      trace changes when current install status does not match on record
      update the lastModification value, then put it back
@@ -95,7 +95,7 @@ public final class PackageCenter {
 
     @PropertiesWrapper(key: "\(kPackageCenterIdentity).installationTrace", defaultValue: Data())
     private var _installationTrace: Data
-    internal var installationTrace: [String: PackageTrace] = [:] {
+    var installationTrace: [String: PackageTrace] = [:] {
         didSet {
             _installationTrace = (try? JSONEncoder().encode(installationTrace)) ?? Data()
         }
@@ -103,7 +103,7 @@ public final class PackageCenter {
 
     @PropertiesWrapper(key: "\(kPackageCenterIdentity).tableTrace", defaultValue: Data())
     private var _tableTrace: Data
-    internal var tableTrace: [String: PackageTrace] = [:] {
+    var tableTrace: [String: PackageTrace] = [:] {
         didSet {
             _tableTrace = (try? JSONEncoder().encode(tableTrace)) ?? Data()
         }
@@ -132,14 +132,14 @@ public final class PackageCenter {
     // MARK: - PERSIST ENGINE
 
     /// encoder
-    internal let persistEncoder: PropertyListEncoder = .init()
+    let persistEncoder: PropertyListEncoder = .init()
     /// decoder
-    internal let persistDecoder: PropertyListDecoder = .init()
+    let persistDecoder: PropertyListDecoder = .init()
 
     // MARK: - NOTIFICATIONS
 
     public static let packageRecordChanged = Notification.Name(rawValue: "\(kPackageCenterIdentity).packageRecordChanged")
-    internal let notificationThrotte = Throttle(minimumDelay: 0.5, queue: .main)
+    let notificationThrotte = Throttle(minimumDelay: 0.5, queue: .main)
 
     // MARK: - INIT
 

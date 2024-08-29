@@ -929,8 +929,8 @@
                 completion: { [weak self] _ in
                     guard let self else { return }
 
-                    self.isHidden = true
-                    self.removeFromSuperview()
+                    isHidden = true
+                    removeFromSuperview()
                     UIAccessibility.post(notification: .screenChanged, argument: nil)
                 }
             )

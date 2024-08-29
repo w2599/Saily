@@ -52,19 +52,19 @@ import UIKit
     public var description: String {
         switch self {
         case .evaporate:
-            return "Evaporate"
+            "Evaporate"
         case .fall:
-            return "Fall"
+            "Fall"
         case .pixelate:
-            return "Pixelate"
+            "Pixelate"
         case .sparkle:
-            return "Sparkle"
+            "Sparkle"
         case .burn:
-            return "Burn"
+            "Burn"
         case .anvil:
-            return "Anvil"
+            "Anvil"
         default:
-            return "Scale"
+            "Scale"
         }
     }
 
@@ -73,16 +73,14 @@ import UIKit
     }
 
     public init(stringLiteral value: String) {
-        self = {
-            switch value {
-            case "Evaporate": return .evaporate
-            case "Fall": return .fall
-            case "Pixelate": return .pixelate
-            case "Sparkle": return .sparkle
-            case "Burn": return .burn
-            case "Anvil": return .anvil
-            default: return .scale
-            }
-        }()
+        self = switch value {
+        case "Evaporate": .evaporate
+        case "Fall": .fall
+        case "Pixelate": .pixelate
+        case "Sparkle": .sparkle
+        case "Burn": .burn
+        case "Anvil": .anvil
+        default: .scale
+        }
     }
 }

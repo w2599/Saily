@@ -22,9 +22,9 @@ enum XxHash32 {
 
     static func hash(data: Data, seed: UInt32 = 0) -> UInt32 {
         if data.count < 16 {
-            return hashSmall(data, seed)
+            hashSmall(data, seed)
         } else {
-            return hashBig(data, seed)
+            hashBig(data, seed)
         }
     }
 

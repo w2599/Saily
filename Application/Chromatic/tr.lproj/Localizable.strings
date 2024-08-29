@@ -46,6 +46,9 @@
 /* Block Update */
 "BLOCK_UPDATE" = "Güncellemeleri engelle";
 
+/* Block Update All (By.zp) */
+"BLOCK_UPDATE_ALL" = "Tüm güncellemeleri engelle";
+
 /* Broken Repo Removed */
 "BROKEN_REPO_REMOVED" = "Bozuk repolar kaldırıldı";
 
@@ -72,6 +75,9 @@
 
 /* Close */
 "CLOSE" = "Kapat";
+
+/* No comment provided by engineer. */
+"Close" = "Kapat";
 
 /* Collect And Overwrite */
 "COLLECT_AND_OVERWRITE" = "Koleksiyonun üzerine yaz";
@@ -102,9 +108,6 @@
 
 /* Copy Meta */
 "COPY_META" = "Metayı Kopyala";
-
-/* Copy Script */
-"COPY_SCRIPT" = "Komutu kopyala";
 
 /* Current Installed */
 "CURRENT_INSTALLED" = "Şu anda yüklü";
@@ -151,6 +154,9 @@
 /* Done */
 "DONE" = "Bitti";
 
+/* No comment provided by engineer. */
+"Double tap to open." = "Açmak için iki kez dokunun";
+
 /* Downgrade */
 "DOWNGRADE" = "Sürüm düşür";
 
@@ -171,6 +177,9 @@
 
 /* Enable History */
 "ENABLE_HISTORY" = "Geçmişi etkinleştir";
+
+/* Enable Quick Mode */
+"ENABLE_QUICK_MODE" = "Hızlı modu etkinleştir";
 
 /* Enable random device info will disable commercial operations */
 "ENABLE_RANDOM_DEVICE_INFO_WILL_DISABLE_COMMERCIAL_OPERATIONS" = "Gizlilik modu satın alımları devre dışı bırakacaktır";
@@ -232,11 +241,17 @@
 /* Install */
 "INSTALL" = "Kur";
 
+/* Install All (By.zp) */
+"INSTALL_ALL" = "Hepsini yükle";
+
 /* Installation Info Refreshed */
 "INSTALLATION_INFO_REFRESHED" = "Kurulu paketler yenilendi";
 
 /* Installed */
 "INSTALLED" = "Paketler";
+
+/* No comment provided by engineer. */
+"Invalid URL" = "Geçersiz URL";
 
 /* Last Modification */
 "LAST_MODIFICATION" = "Son düzenleme";
@@ -336,6 +351,9 @@
 
 /* We found these links in the clipboard, they may be the source of the software */
 "PASTEBOARD_REPO_DESCRIPTION" = "Panoda bu bağlantıları bulduk, belki repo olabilirler";
+
+/* No comment provided by engineer. */
+"Path List Viewer" = "Yol Listesi Görüntüleyici";
 
 /* Press add button above to add some */
 "PLEASE_ADD_REPO" = "Biraz eklemek için yukarıdaki ekle düğmesine basın";
@@ -507,6 +525,9 @@
 
 /* This operation cannot be undone */
 "THIS_OPERATION_CANNOT_BE_UNDONE" = "Bu işlem geri alınamaz.";
+
+/* Please search - long press [package list] - overwrite collection */
+"TIPS1" = "Lütfen arama yapın - [paket listesi] üzerine uzun basın - koleksiyonu geçersiz kılın";
 
 /* Toggle */
 "TOGGLE" = "Seç";
