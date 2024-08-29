@@ -25,14 +25,14 @@ public enum DiggerCache {
         cachesDirectory.cacheDir + "/" + url.lastPathComponent
     }
 
-    static func removeTempFile(with url: URL) {
+    public static func removeTempFile(with url: URL) {
         let fileTempParh = tempPath(url: url)
         if isFileExist(atPath: fileTempParh) {
             removeItem(atPath: fileTempParh)
         }
     }
 
-    static func removeCacheFile(with url: URL) {
+    public static func removeCacheFile(with url: URL) {
         let fileCachePath = cachePath(url: url)
         if isFileExist(atPath: fileCachePath) {
             removeItem(atPath: fileCachePath)

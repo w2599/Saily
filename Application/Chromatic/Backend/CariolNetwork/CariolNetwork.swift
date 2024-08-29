@@ -127,17 +127,18 @@ class CariolNetwork {
 
     func syncDownloadRequest(packageList list: [Package]) {
         debugPrint("syncing download requests")
-        let allUrls = list
-            .map { $0.obtainDownloadLink() }
+        let allUrls = list.map { $0.obtainDownloadLink() }
+
         let diggerSeeds = DiggerManager
             .shared
             .obtainAllTasks()
-        let cancelItems = diggerSeeds
-            .filter { !allUrls.contains($0) }
+
+        let cancelItems = diggerSeeds.filter { !allUrls.contains($0) }
         for item in cancelItems {
             debugPrint("canceling digger seeds on \(item.absoluteString)")
             DiggerManager.shared.stopTask(for: item)
         }
+
         for item in list {
             if item.latestMetadata?[DirectInstallInjectedPackageLocationKey] != nil {
                 continue
@@ -158,21 +159,31 @@ class CariolNetwork {
     ///   - url: url to download
     ///   - represents: for this package
     func handleDownloadWith(url: URL, represents: Package) {
+        assert(!Thread.isMainThread)
+
         if let cache = completedFileLookup[url],
            FileManager.default.fileExists(atPath: cache.path)
         {
-            Dog.shared.join(self, "found cache file at \(cache.path) for request \(url.absoluteString)")
-            let progress = Progress(totalUnitCount: 1)
-            progress.completedUnitCount = 1
-            let notification = CariolNetwork.DownloadNotification(completed: true,
-                                                                  represent: represents,
-                                                                  representUrl: url,
-                                                                  progress: progress,
-                                                                  speedBytes: 0,
-                                                                  targetLocation: cache,
-                                                                  error: nil)
-            NotificationCenter.default.post(name: .DownloadProgress, object: notification)
-            return
+            if verifyPackage(represents, dataAt: cache) {
+                Dog.shared.join(self, "found cached file at \(cache.path) for request \(url.absoluteString)")
+                let progress = Progress(totalUnitCount: 1)
+                progress.completedUnitCount = 1
+                let notification = CariolNetwork.DownloadNotification(completed: true,
+                                                                      represent: represents,
+                                                                      representUrl: url,
+                                                                      progress: progress,
+                                                                      speedBytes: 0,
+                                                                      targetLocation: cache,
+                                                                      error: nil)
+                NotificationCenter.default.post(name: .DownloadProgress, object: notification)
+                return
+            } else {
+                // possibly that package was updated without modifying the url
+                Dog.shared.join(self, "cached file at \(cache.path) for request \(url.absoluteString) failed verification")
+                try? FileManager.default.removeItem(at: cache)
+                DiggerCache.removeTempFile(with: url)
+                DiggerCache.removeCacheFile(with: url)
+            }
         }
 
         debugPrint("preparing request to \(url.absoluteString)")
@@ -202,53 +213,105 @@ class CariolNetwork {
             NotificationCenter.default.post(name: .DownloadProgress, object: notification)
         }
         makeNotification()
-        DiggerManager
-            .shared
-            .download(with: url)
-            .speed { bytes in
-                speedCache = Int(bytes)
-                makeNotification()
-            }
-            .progress { progress in
-                progressCache = progress
-                makeNotification()
-            }
-            .completion { result in
-                progressCache.completedUnitCount = progressCache.completedUnitCount
-                makeNotification()
-                completedCache = true
-                switch result {
-                case let .success(targetLocation):
-                    Dog.shared.join(self,
-                                    "download on \(url.lastPathComponent) succeed with target location \(targetLocation.path)",
-                                    level: .info)
-                    DispatchQueue.global().async {
-                        let success = self.finalizeDownload(for: represents,
-                                                            downloadFrom: url,
-                                                            dataAt: targetLocation)
-                        if success {
-                            targetLocationCache = targetLocation
-                            makeNotification()
-                        } else {
-                            let error = NSLocalizedString("VERIFICATION_FAILURE_OCCURRED", comment: "verification failure occurred")
-                            errorCache = NSError(domain: error,
-                                                 code: Int(EPERM),
-                                                 userInfo: [:])
-                            makeNotification()
-                        }
+
+        let seed = DiggerManager.shared.download(with: url)
+
+        seed.speed { bytes in
+            speedCache = Int(bytes)
+            makeNotification()
+        }
+
+        seed.progress { progress in
+            progressCache = progress
+            makeNotification()
+        }
+        seed.completion { result in
+            progressCache.completedUnitCount = progressCache.completedUnitCount
+            makeNotification()
+            completedCache = true
+            switch result {
+            case let .success(targetLocation):
+                Dog.shared.join(self,
+                                "download on \(url.lastPathComponent) succeed with target location \(targetLocation.path)",
+                                level: .info)
+                DispatchQueue.global().async {
+                    let success = self.finalizeDownload(for: represents,
+                                                        downloadFrom: url,
+                                                        dataAt: targetLocation)
+                    if success {
+                        targetLocationCache = targetLocation
+                        makeNotification()
+                    } else {
+                        let error = NSLocalizedString("VERIFICATION_FAILURE_OCCURRED", comment: "verification failure occurred")
+                        errorCache = NSError(domain: error,
+                                             code: Int(EPERM),
+                                             userInfo: [:])
+                        makeNotification()
                     }
-                case let .failure(error):
-                    errorCache = error
-                    Dog.shared.join(self,
-                                    "download on \(url.lastPathComponent) returned with failure \(error.localizedDescription)",
-                                    level: .info)
-                    makeNotification()
                 }
+            case let .failure(error):
+                errorCache = error
+                Dog.shared.join(self,
+                                "download on \(url.lastPathComponent) returned with failure \(error.localizedDescription)",
+                                level: .info)
+                makeNotification()
             }
+        }
+
         DiggerManager.shared.startTask(for: url)
     }
 
     typealias Success = Bool
+
+    func verifyPackage(_ package: Package, dataAt: URL) -> Bool {
+        // MARK: - HASH VALIDATE
+
+        // verify only one component
+        // the md5 takes really long time
+        // (using method rather than CommonCrypto)
+        // to kill system library warning
+
+        guard let data = try? Data(contentsOf: dataAt) else {
+            try? FileManager.default.removeItem(atPath: dataAt.path)
+            Dog.shared.join(self, "failed to read \(package.identity) from \(dataAt.path)", level: .error)
+            return false
+        }
+
+        func hashFailureOut(expect: String, has: String, type: String) {
+            try? FileManager.default.removeItem(atPath: dataAt.path)
+            Dog.shared.join(self, "failed to hash \(package.identity) \(dataAt.path) expect: \(expect) has: \(has) [\(type)]", level: .error)
+        }
+
+        if let predicatedHashSHA1 = package.latestMetadata?["sha1"] {
+            let sha1 = String.sha1From(data: data)
+            if sha1 != predicatedHashSHA1 {
+                hashFailureOut(expect: predicatedHashSHA1, has: sha1, type: "sha1")
+                return false
+            }
+            return true
+        }
+        if let predicatedHashSHA256 = package.latestMetadata?["sha256"] {
+            let sha256 = String.sha256From(data: data)
+            if sha256 != predicatedHashSHA256 {
+                hashFailureOut(expect: predicatedHashSHA256, has: sha256, type: "sha1")
+                return false
+            }
+            return true
+        }
+        if let predicatedHashMD5 = package.latestMetadata?["md5sum"] {
+            let md5sum = SwiftMD5.md5From(data)
+            if md5sum != predicatedHashMD5 {
+                hashFailureOut(expect: predicatedHashMD5, has: md5sum, type: "md5")
+                return false
+            }
+            return true
+        }
+
+        Dog.shared.join(self,
+                        "package \(package.identity) unable to verify due to missing hash tag, treating as success",
+                        level: .warning)
+        return true
+    }
 
     /// called when digger returns the target url
     ///   - validate sum hash
@@ -259,58 +322,11 @@ class CariolNetwork {
     ///   - package: the package that downloaded
     ///   - target: digger seed location
     func finalizeDownload(for package: Package, downloadFrom: URL, dataAt: URL) -> Success {
-        guard let data = try? Data(contentsOf: dataAt) else {
-            try? FileManager.default.removeItem(atPath: dataAt.path)
-            Dog.shared.join(self, "failed to read \(package.identity) from \(dataAt.path)", level: .error)
-            return false
-        }
-
-        // MARK: - HASH VALIDATE
-
-        // verify only one component
-        // the md5 takes really long time
-        // (using method rather than CommonCrypto)
-        // to kill system library warning
-
-        var verified = false
-        func hashFailureOut(expect: String, has: String, type: String) {
-            try? FileManager.default.removeItem(atPath: dataAt.path)
-            Dog.shared.join(self, "failed to hash \(package.identity) \(dataAt.path) expect: \(expect) has: \(has) [\(type)]", level: .error)
-        }
-        if !verified, let predicatedHashSHA1 = package.latestMetadata?["sha1"] {
-            let sha1 = String.sha1From(data: data)
-            if sha1 != predicatedHashSHA1 {
-                hashFailureOut(expect: predicatedHashSHA1, has: sha1, type: "sha1")
-                return false
-            }
-            verified = true
-        }
-        if !verified, let predicatedHashSHA256 = package.latestMetadata?["sha256"] {
-            let sha256 = String.sha256From(data: data)
-            if sha256 != predicatedHashSHA256 {
-                hashFailureOut(expect: predicatedHashSHA256, has: sha256, type: "sha1")
-                return false
-            }
-            verified = true
-        }
-        if !verified, let predicatedHashMD5 = package.latestMetadata?["md5sum"] {
-            let md5sum = SwiftMD5.md5From(data)
-            if md5sum != predicatedHashMD5 {
-                hashFailureOut(expect: predicatedHashMD5, has: md5sum, type: "md5")
-                return false
-            }
-            verified = true
-        }
-
-        if !verified {
-            Dog.shared.join(self,
-                            "package \(package.identity) unable to verify due to missing hash tag, treating as success",
-                            level: .warning)
-        }
+        guard verifyPackage(package, dataAt: dataAt) else { return false }
 
         // MARK: - GENERATE CACHE FILE NAME
 
-        let cacheUrl = generateDownloadFileUrlWith(downloadUrl: downloadFrom)
+        let cacheUrl = generateDownloadFileUrlWith(package: package)
         try? FileManager.default.createDirectory(at: workingLocation,
                                                  withIntermediateDirectories: true,
                                                  attributes: nil)
@@ -333,38 +349,30 @@ class CariolNetwork {
         return true
     }
 
-    private func generateDownloadFileUrlWith(downloadUrl: URL) -> URL {
-        try? FileManager.default.createDirectory(at: workingLocation,
-                                                 withIntermediateDirectories: true,
-                                                 attributes: nil)
-        var buildName = downloadUrl
-            .lastPathComponent
-            .components(separatedBy: illegalFileNameCharacters)
-            .joined()
-        var justInCase = 0
-        while FileManager
-            .default
-            .fileExists(atPath: workingLocation.appendingPathComponent(buildName).path),
-            justInCase < 10
-        {
-            var ext = downloadUrl.pathExtension
-            if ext.count < 1 { ext = "dld" }
-            if buildName.hasSuffix(ext) {
-                buildName.removeLast(ext.count)
+    private func generateDownloadFileUrlWith(package: Package) -> URL {
+        try? FileManager.default.createDirectory(
+            at: workingLocation,
+            withIntermediateDirectories: true,
+            attributes: nil
+        )
+
+        for _ in 0 ... 10 {
+            let buildName = [
+                package.identity,
+                package.latestVersion ?? "0",
+                String(Int.random(in: 100_000 ... 999_999)),
+            ]
+            .map { $0.components(separatedBy: illegalFileNameCharacters).joined() }
+            .joined(separator: "_") + ".deb"
+
+            let url = workingLocation.appendingPathComponent(buildName)
+            if !FileManager.default.fileExists(atPath: url.path) {
+                return url
             }
-            if buildName.hasSuffix(".") {
-                buildName.removeLast()
-            }
-            var random = ""
-            while random.count < 6 {
-                random += String(Character.randomAlphanumeric())
-            }
-            buildName += "_\(random)"
-            buildName += "."
-            buildName += ext
-            justInCase += 1
         }
-        return workingLocation.appendingPathComponent(buildName)
+
+        // wow real bad luck
+        return workingLocation.appendingPathComponent(UUID().uuidString + ".deb")
     }
 
     /// get downloaded file for package
