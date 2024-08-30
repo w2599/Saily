@@ -13,7 +13,14 @@ extension Repository {
     mutating func applyNoneFlatWellKnownRepositoryIfNeeded() {
         switch url.host {
         case "apt.procurs.us":
-            distribution = "1900" // hard coded for rootless
+            if #available(iOS 16, *) {
+                distribution = "1900"
+            } else if #available(iOS 15, *) {
+                distribution = "1800"
+            } else {
+                // since we are using deployment target iOS 15+ we wont be here
+                distribution = "-"
+            }
             component = "main"
             return
         case "apt.thebigboss.org", "apt.modmyi.com", "cydia.zodttd.com":
